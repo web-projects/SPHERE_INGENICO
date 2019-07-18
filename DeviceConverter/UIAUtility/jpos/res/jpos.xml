@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?><JposEntries>
+<!--Saved by JavaPOS jpos.config/loader (JCL) version 2.3.0-RC3 on 7/9/14 10:36 AM-->
+    
+
+<JposEntry logicalName="MSR_iSC250">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.MSRService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="MSR" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) MSR Service for Telium iSC250 ISO Magnetic Strip Readers" name="Ingenico JavaPOS for Telium iSC250" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="rfid" type="Integer" value="0"/>
+        <prop name="portName" type="String" value="COM109"/>
+        <prop name="msrscriptprops" type="String" value="./res/msr.properties"/>
+        <prop name="ipaddress" type="String" value="192.168.000.106"/>
+        <prop name="FireReaderSourceEvent" type="Boolean" value="false"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="dioproperties" type="String" value="./res/dio.properties"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="backlight" type="Byte" value="0"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="msrBeep" type="Boolean" value="true"/>
+        <prop name="timeOut" type="Integer" value="60000"/>
+        <prop name="MsrCardPrompt" type="String" value="Insert or Swipe Card"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="FireProgressEvent" type="String" value="true"/>
+        <prop name="ConfigPath" type="String" value="./res/iSC250/"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="emv" type="Integer" value="1"/>
+        <prop name="retrieveFileDirectory" type="String" value="C:/TrustCommerce/logs"/>
+</JposEntry>
+        
+
+    
+<JposEntry logicalName="SigCap_iSC250">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.SignatureCaptureService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="SignatureCapture" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) SignatureCapture Service for Telium iSC250 Touch Screen" name="Ingenico JavaPOS for Telium iSC250" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="portName" type="String" value="COM109"/>
+        <prop name="ipaddress" type="String" value="192.168.000.106"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="dioproperties" type="String" value="./res/dio.properties"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="clearScreen" type="Boolean" value="false"/>
+        <prop name="optimize" type="Boolean" value="true"/>
+        <prop name="backlight" type="Byte" value="0"/>
+        <prop name="sigTotal" type="Byte" value="0"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="timeOut" type="Integer" value="60000"/>
+        <prop name="sigStart" type="Byte" value="0"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="sigFormat" type="Byte" value="0"/>
+        <prop name="FireProgressEvent" type="String" value="true"/>
+        <prop name="ConfigPath" type="String" value="./res/iSC250/"/>
+        <prop name="JposSpec" type="Boolean" value="false"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="validateFile" type="Boolean" value="false"/>
+        <prop name="Sigform" type="String" value="SIGSC250.K3Z"/>
+</JposEntry>
+    
+    
+<JposEntry logicalName="PINPad_iSC250">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.PINPadService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="PINPad" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) PINPad Service for Telium iSC250 Touch Screen" name="Ingenico JavaPOS for Telium iSC250" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="portName" type="String" value="COM109"/>
+        <prop name="ipaddress" type="String" value="192.168.000.106"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="keyIndex" type="Byte" value="0"/>
+        <prop name="dioproperties" type="String" value="./res/dio.properties"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="backlight" type="Byte" value="0"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="pinform" type="String" value="PINSC250.K3Z"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="PINPadSystem" type="String" value="DUKPT"/>
+        <prop name="timeOut" type="Integer" value="30000"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="pinTimeout2" type="Byte" value="15"/>
+        <prop name="pinTimeout1" type="Byte" value="15"/>
+        <prop name="FireProgressEvent" type="String" value="true"/>
+        <prop name="ConfigPath" type="String" value="./res/iSC250/"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="data" type="String" value="DATA0520.PGZ"/>
+</JposEntry>
+    
+    
+<JposEntry logicalName="MSR_iSC480">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.MSRService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="MSR" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) MSR Service for Telium iSC480 ISO Magnetic Strip Readers" name="Ingenico JavaPOS for Telium iSC480" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="rfid" type="Integer" value="0"/>
+        <prop name="portName" type="String" value="COM111"/>
+        <prop name="msrscriptprops" type="String" value="./res/msr.properties"/>
+        <prop name="ipaddress" type="String" value="192.168.000.101"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="dioproperties" type="String" value="./res/dio.properties"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="backlight" type="Byte" value="0"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="msrBeep" type="Boolean" value="true"/>
+        <prop name="timeOut" type="Integer" value="30000"/>
+        <prop name="MsrCardPrompt" type="String" value="Tap or Swipe Card"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="FireProgressEvent" type="String" value="true"/>
+        <prop name="ConfigPath" type="String" value="./res/isc480/"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="emv" type="Integer" value="1"/>
+        <prop name="retrieveFileDirectory" type="String" value="C:/TrustCommerce/logs"/>
+</JposEntry>
+    
+<JposEntry logicalName="SigCap_iSC480">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.SignatureCaptureService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="SignatureCapture" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) SignatureCapture Service for Telium iSC480 Touch Screen" name="Ingenico JavaPOS for Telium iSC480" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="portName" type="String" value="COM111"/>
+        <prop name="ipaddress" type="String" value="192.168.000.106"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="dioproperties" type="String" value="./res/dio.properties"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="clearScreen" type="Boolean" value="false"/>
+        <prop name="optimize" type="Boolean" value="true"/>
+        <prop name="backlight" type="Byte" value="0"/>
+        <prop name="sigTotal" type="Byte" value="0"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="timeOut" type="Integer" value="60000"/>
+        <prop name="sigStart" type="Byte" value="0"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="sigFormat" type="Byte" value="0"/>
+        <prop name="FireProgressEvent" type="String" value="true"/>
+        <prop name="ConfigPath" type="String" value="./res/iSC250/"/>
+        <prop name="JposSpec" type="Boolean" value="false"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="validateFile" type="Boolean" value="false"/>
+        <prop name="Sigform" type="String" value="SIGSC480.K3Z"/>
+</JposEntry>
+
+<JposEntry logicalName="PINPad_iSC480">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.PINPadService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="PINPad" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) PINPad Service for Telium iSC480 Touch Screen" name="Ingenico JavaPOS for Telium iSC480" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="portName" type="String" value="COM111"/>
+        <prop name="ipaddress" type="String" value="192:168:2:2"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="keyIndex" type="Byte" value="0"/>
+        <prop name="dioproperties" type="String" value="./res/dio.properties"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="backlight" type="Byte" value="0"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="pinform" type="String" value="PINSC480.K3Z"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="currentPromptLanguage" type="String" value="en,US"/>
+        <prop name="timeOut" type="Integer" value="30000"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="pinTimeout2" type="Byte" value="15"/>
+        <prop name="pinTimeout1" type="Byte" value="15"/>
+        <prop name="FireProgressEvent" type="String" value="true"/>
+        <prop name="ConfigPath" type="String" value="./res/isc480/"/>
+        <prop name="baudRate" type="String" value="115200"/>
+</JposEntry>
+
+
+<JposEntry logicalName="MSR_iPP350">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.MSRService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="MSR" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) MSR Service for Telium iPP350 1000 ISO Magnetic Strip Readers" name="Ingenico JavaPOS for Telium iPP350" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="rfid" type="Integer" value="0"/>
+        <prop name="portName" type="String" value="COM35"/>
+        <prop name="ipaddress" type="String" value="192:168:2:2"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="dioproperties" type="String" value="./res/dio.properties"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="backlight" type="Byte" value="0"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="msrBeep" type="Boolean" value="true"/>
+        <prop name="timeOut" type="Integer" value="30000"/>
+        <prop name="MsrCardPrompt" type="String" value="Insert or Swipe Card"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="ConfigPath" type="String" value="./res/ipp350/"/>
+        <prop name="FireProgressEvent" type="String" value="true"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="emv" type="Integer" value="1"/>
+        <prop name="retrieveFileDirectory" type="String" value="C:/TrustCommerce/logs"/>
+</JposEntry>
+    
+    
+<JposEntry logicalName="PINPad_iPP350">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.PINPadService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="PINPad" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) PINPad Service for Telium iPP350 Touch Screen" name="Ingenico JavaPOS for Telium iPP350" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="portName" type="String" value="COM110"/>
+        <prop name="ipaddress" type="String" value="192.168.000.106"/>
+        <prop name="mac" type="Boolean" value="false"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="keyIndex" type="Byte" value="0"/>
+        <prop name="dioproperties" type="String" value="./res/dio.properties"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="backlight" type="Byte" value="0"/>
+        <prop name="attribute" type="Byte" value="0"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="font" type="Byte" value="2"/>
+        <prop name="pinform" type="String" value="PINPP350.K3Z"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="timeOut" type="Integer" value="30000"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="pinTimeout2" type="Byte" value="15"/>
+        <prop name="pinTimeout1" type="Byte" value="15"/>
+        <prop name="ConfigPath" type="String" value="./res/ipp350/"/>
+        <prop name="FireProgressEvent" type="String" value="true"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="data" type="String" value="DATA0520.PGZ"/>
+</JposEntry>
+
+<JposEntry logicalName="MSR_iUP250">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.MSRService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="MSR" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) MSR Service for Telium iUP250 Touch Screen" name="Ingenico JavaPOS for Telium iUP250" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="DisplayFormActionRelease" type="String" value="N/A"/>
+        <prop name="FireReaderSourceEvent" type="Boolean" value="true"/>
+        <prop name="DisplayFormActionErrorEvent" type="String" value="N/A"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="backlight" type="Byte" value="3"/>
+        <prop name="MsrCardPromptAVAILABLE" type="String" value="Tap or Swipe Card"/>
+        <prop name="portName" type="String" value="COM112"/>
+        <prop name="ipaddress" type="String" value="127.0.0.1"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="tone2Timer" type="String" value="30"/>
+        <prop name="tone1Frequency" type="String" value="4200"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="DisplayFormActionClaim" type="String" value="N/A"/>
+        <prop name="DisplayFormActionDataEvent" type="String" value="N/A"/>
+        <prop name="DisplayFormActionDeviceEnable" type="String" value="N/A"/>
+        <prop name="tone2Frequency" type="String" value="2100"/>
+        <prop name="DisplayFormActionDeviceDisable" type="String" value="N/A"/>
+        <prop name="msr" type="Integer" value="1"/>
+        <prop name="msrBeep" type="Boolean" value="true"/>
+        <prop name="FireProgressEvent" type="String" value="false"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <!--<prop name="EnableMsr" type="String" value="SWIPE.K3Z"/>-->
+        <prop name="SaveFileTimeout" type="Integer" value="100"/>
+        <prop name="ConfigPath" type="String" value="C:/ProgramData/Ingenico/TeliumOPOS/res/iUP250"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="ClearScreenAfterPinEntry" type="String" value="false"/>
+        <prop name="EnablePowerReporting" type="Integer" value="0"/>
+        <prop name="tone1Timer" type="String" value="15"/>
+        <prop name="MsrCardPromptMSR" type="String" value="Insert Card"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="retrieveFileDirectory" type="String" value="C:/TrustCommerce/logs"/>
+		<prop name="rfid" type="Integer" value="0"/>
+        <prop name="emv" type="Integer" value="1"/>
+        <prop name="timeOut" type="Integer" value="30000"/>
+</JposEntry>
+
+    
+<JposEntry logicalName="PINPad_iUP250">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.PINPadService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="PINPad" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) PINPad Service for Telium iUP250 Touch Screen" name="Ingenico JavaPOS for Telium iUP250" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="DisplayFormActionRelease" type="String" value="N/A"/>
+        <prop name="PinPadMaxDigitKey" type="Integer" value="12"/>
+        <prop name="DisplayFormActionErrorEvent" type="String" value="N/A"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="portName" type="String" value="COM112"/>
+        <prop name="ipaddress" type="String" value="127.0.0.1"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="tone2Timer" type="String" value="30"/>
+        <prop name="tone1Frequency" type="String" value="4200"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="PinPadMinDigitKey" type="Integer" value="4"/>
+        <prop name="DisplayFormActionClaim" type="String" value="N/A"/>
+        <prop name="DisplayFormActionDataEvent" type="String" value="N/A"/>
+        <prop name="DisplayFormActionDeviceEnable" type="String" value="N/A"/>
+        <prop name="tone2Frequency" type="String" value="2100"/>
+        <prop name="DisplayFormActionDeviceDisable" type="String" value="N/A"/>
+        <prop name="PinEntry" type="String" value="PINUP250.K3Z"/>
+        <prop name="pinTimeout2" type="Byte" value="30"/>
+        <prop name="pinTimeout1" type="Byte" value="30"/>
+        <prop name="FireProgressEvent" type="String" value="false"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="currentPromptLanguage" type="String" value="en,US"/>
+        <prop name="SaveFileTimeout" type="Integer" value="100"/>
+        <prop name="ConfigPath" type="String" value="./res/iUP250/"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="ClearScreenAfterPinEntry" type="String" value="false"/>
+        <prop name="EnablePowerReporting" type="Integer" value="0"/>
+        <prop name="tone1Timer" type="String" value="15"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="timeOut" type="Integer" value="60000"/>
+</JposEntry>
+
+<JposEntry logicalName="LineDisplay_iUP250">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.LineDisplayService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="LineDisplay" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) LineDisplay Service for Telium iUP250 Touch Screen" name="Ingenico JavaPOS for Telium iUP250" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="DisplayFormActionRelease" type="String" value="N/A"/>
+        <prop name="ClearAllWindows" type="String" value="true"/>
+        <prop name="EnableAddNewLine" type="Boolean" value="true"/>
+        <prop name="5992_Compatible" type="String" value="false"/>
+        <prop name="DisplayFormActionErrorEvent" type="String" value="N/A"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="portName" type="String" value="COM112"/>
+        <prop name="ipaddress" type="String" value="127.0.0.1"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="tone2Timer" type="String" value="30"/>
+        <prop name="tone1Frequency" type="String" value="4200"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="DisplayFormActionClaim" type="String" value="N/A"/>
+        <prop name="configlog" type="String" value="C:/ProgramData/Ingenico/TeliumOPOS/./res/configlog.xml"/>
+        <prop name="DisplayFormActionDataEvent" type="String" value="N/A"/>
+        <prop name="DisplayFormActionDeviceEnable" type="String" value="N/A"/>
+        <prop name="tone2Frequency" type="String" value="2100"/>
+        <prop name="retrieveFileDirectory" type="String" value="C:\"/>
+        <prop name="DisplayFormActionDeviceDisable" type="String" value="N/A"/>
+        <prop name="FireProgressEvent" type="String" value="false"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="SaveFileTimeout" type="Integer" value="100"/>
+        <prop name="ConfigPath" type="String" value="C:/ProgramData/Ingenico/TeliumOPOS/./res/iUP250"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="EnablePowerReporting" type="Integer" value="0"/>
+        <prop name="tone1Timer" type="String" value="15"/>
+        <prop name="flowControl" type="String" value="None"/>
+</JposEntry>
+
+<JposEntry logicalName="MSR_iPP320">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.MSRService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="MSR" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) MSR Service for Telium iPP320 1000 ISO Magnetic Strip Readers" name="Ingenico JavaPOS for Telium iPP320" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="rfid" type="Integer" value="0"/>
+        <prop name="portName" type="String" value="COM35"/>
+        <prop name="ipaddress" type="String" value="192:168:2:2"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="dioproperties" type="String" value="./res/dio.properties"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="backlight" type="Byte" value="0"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="msrBeep" type="Boolean" value="true"/>
+        <prop name="timeOut" type="Integer" value="30000"/>
+        <prop name="MsrCardPrompt" type="String" value="Insert or Swipe Card"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="ConfigPath" type="String" value="./res/ipp320/"/>
+        <prop name="FireProgressEvent" type="String" value="true"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="emv" type="Integer" value="1"/>
+        <prop name="retrieveFileDirectory" type="String" value="C:/TrustCommerce/logs"/>
+</JposEntry>
+    
+    
+<JposEntry logicalName="PINPad_iPP320">
+        <creation factoryClass="com.ingenico.jpos.services.IngenicoServiceInstanceFactory" serviceClass="com.ingenico.jpos.services.telium.PINPadService"/>
+        <vendor name="Ingenico" url="http://www.ingenico-us.com"/>
+        <jpos category="PINPad" version="1.13.100"/>
+        <product description="Ingenico JavaPOS(TM) PINPad Service for Telium iPP320 Touch Screen" name="Ingenico JavaPOS for Telium iPP350" url="http://www.ingenico-us.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="portName" type="String" value="COM113"/>
+        <prop name="ipaddress" type="String" value="192.168.000.106"/>
+        <prop name="mac" type="Boolean" value="false"/>
+        <prop name="dataBits" type="String" value="8"/>
+        <prop name="keyIndex" type="Byte" value="0"/>
+        <prop name="dioproperties" type="String" value="./res/dio.properties"/>
+        <prop name="port" type="Integer" value="12000"/>
+        <prop name="backlight" type="Byte" value="0"/>
+        <prop name="attribute" type="Byte" value="0"/>
+        <prop name="parity" type="String" value="None"/>
+        <prop name="font" type="Byte" value="2"/>
+        <prop name="pinform" type="String" value="PINPP350.K3Z"/>
+        <prop name="flowControl" type="String" value="None"/>
+        <prop name="stopBits" type="String" value="1"/>
+        <prop name="timeOut" type="Integer" value="30000"/>
+        <prop name="deviceBus" type="String" value="RS232"/>
+        <prop name="pinTimeout2" type="Byte" value="15"/>
+        <prop name="pinTimeout1" type="Byte" value="15"/>
+        <prop name="ConfigPath" type="String" value="./res/ipp320/"/>
+        <prop name="FireProgressEvent" type="String" value="true"/>
+        <prop name="baudRate" type="String" value="115200"/>
+        <prop name="data" type="String" value="DATA0520.PGZ"/>
+</JposEntry>
+
+
+</JposEntries>

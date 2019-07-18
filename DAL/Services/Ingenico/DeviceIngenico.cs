@@ -21,7 +21,7 @@ namespace IPA.DAL.RBADAL.Services
         private Ingenico.Device _ingenicoDevice;
         private Ingenico.Device.Health _deviceHealth;
         private Ingenico.Device.Info _deviceInfo;
-        private HidDevice device;
+        private HidDevice device = null;
 
         public const int IngenicoVendorID = 0x0b00;
 
@@ -38,7 +38,7 @@ namespace IPA.DAL.RBADAL.Services
         internal static string port350;
         internal static string port480;
 
-        Device _device = new Device();
+        readonly Device _device = new Device();
 
         #endregion
 
@@ -196,7 +196,7 @@ namespace IPA.DAL.RBADAL.Services
             }
             catch (Exception ex)
             {
-                //LoggingManager.ConsoleWriteLine($"Failed to connect to the RBA Ingeico Device: {ex.Message}");
+                Debug.WriteLine($"Failed to connect to the RBA Ingeico Device: {ex.Message}");
             }
             finally
             {

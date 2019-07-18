@@ -25,3 +25,4 @@ This an application to Configure Ingenico Devices.
 ### HISTORY ###
 
 * 20190718 - Initial repository.
+           - Cleaned up project and removed warnings.

@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceConverter", "DeviceConverter\DeviceConverter.csproj", "{8EECB3D8-27A1-4ADC-96D3-DC84796F43A7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D03B9C37-6BFF-4E70-BB0E-C4DEA43621C8} = {D03B9C37-6BFF-4E70-BB0E-C4DEA43621C8}
+		{165D403C-205D-4302-978D-234981F456C8} = {165D403C-205D-4302-978D-234981F456C8}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceConfiguration", "DeviceConfiguration\DeviceConfiguration.csproj", "{D03B9C37-6BFF-4E70-BB0E-C4DEA43621C8}"

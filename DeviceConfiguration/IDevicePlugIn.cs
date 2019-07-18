@@ -12,7 +12,7 @@ namespace IPA.DAL.RBADAL
     string PluginName { get; }
     // DISCOVERY
     bool FindIngenicoDevice(ref string description, ref string deviceID);
-    void IdentifyUIADevice();
+    bool IdentifyUIADevice();
     void DeviceInit();
     // GUI UPDATE
     string [] GetConfig();

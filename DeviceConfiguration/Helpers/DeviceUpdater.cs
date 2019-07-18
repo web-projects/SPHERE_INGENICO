@@ -15,9 +15,8 @@ namespace IPA.DeviceConfiguration.Helpers
 
         private static bool IsRBADevice(string model)
         {
-            string rbaVersion;
             DeviceIngenico device = new DeviceIngenico();
-            bool isRBA = device.GetRBAVersion(ref model, out rbaVersion);
+            bool isRBA = device.GetRBAVersion(ref model, out string rbaVersion);
             if (isRBA)
             {
                 if (rbaVersion.Contains("- 21"))

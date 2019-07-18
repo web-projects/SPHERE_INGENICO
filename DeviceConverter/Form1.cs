@@ -183,7 +183,7 @@ namespace IPA.MainApp
                 try
                 {
                     //expected collection: object, string
-                    object [] data = ((IEnumerable) e.Message)?.Cast<object>().Select(x => x == null ? "" : x).ToArray() ?? null;
+                    object [] data = e.Message?.Cast<object>().Select(x => x ?? "").ToArray() ?? null;
                     if(data != null && data.Length > 0)
                     {
                         string status = IPA.DAL.Helpers.StatusCode.GetDisplayMessage((SearchStatus.StatusIndex)data[0]);
@@ -279,8 +279,17 @@ namespace IPA.MainApp
                         else if(ex.Message.Equals("UIADevice"))
                         {
                             try
-                            { 
-                                devicePlugin.IdentifyUIADevice();
+                            {
+                                this.Invoke(new MethodInvoker(() =>
+                                {
+                                    this.ApplicationlblStatus.Text += " => UIA DISCOVERY...";
+                                }));
+
+                                new Thread(() =>
+                                {
+                                    Thread.CurrentThread.IsBackground = true;
+                                    devicePlugin.IdentifyUIADevice();
+                                }).Start();
                             }
                             catch(Exception exc)
                             {

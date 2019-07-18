@@ -168,8 +168,10 @@ namespace IPA.DAL.RBADAL
             return false;
         }
 
-        public void IdentifyUIADevice()
+        public bool IdentifyUIADevice()
         {
+            bool expectedResponses = false;
+
             System.Security.Principal.WindowsIdentity identity = System.Security.Principal.WindowsIdentity.GetCurrent();
             System.Security.Principal.WindowsPrincipal principal = new System.Security.Principal.WindowsPrincipal(identity);
 
@@ -180,7 +182,6 @@ namespace IPA.DAL.RBADAL
                 //System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(directory);
                 string path = System.IO.Directory.GetCurrentDirectory(); 
 
-                bool expectedResponses = false;
                 string uiaVersion = string.Empty;
                 string model = string.Empty;
                 string modelVer = string.Empty;
@@ -235,6 +236,12 @@ namespace IPA.DAL.RBADAL
                     }
                 }
             }
+            else
+            {
+                NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = new [] { "cannot proceed as non-Administrator." } });
+            }
+
+            return expectedResponses;
         }
 
         void OutputDataHandler(object sendingProcess, DataReceivedEventArgs e)

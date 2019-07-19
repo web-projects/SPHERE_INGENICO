@@ -16,6 +16,10 @@ namespace IPA.DAL.RBADAL
             INGENICO_DEVICE_FOUND = 101,
             [System.ComponentModel.Description("querying for UIA device")]
             UIA_INGENICO_DEVICE_SEARCH = 102,
+            [System.ComponentModel.Description("updating UIA firmware...")]
+            UIA_INGENICO_FIRMWARE_UPDATE = 103,
+            [System.ComponentModel.Description("File Upload failed.")]
+            UIA_INGENICO_FIRMWARE_FAILED = 104,
         }
     }
 }

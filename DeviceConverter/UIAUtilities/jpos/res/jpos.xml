@@ -193,7 +193,7 @@
 
         <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
         <prop name="rfid" type="Integer" value="0"/>
-        <prop name="portName" type="String" value="COM35"/>
+        <prop name="portName" type="String" value="COM110"/>
         <prop name="ipaddress" type="String" value="192:168:2:2"/>
         <prop name="dataBits" type="String" value="8"/>
         <prop name="dioproperties" type="String" value="./res/dio.properties"/>

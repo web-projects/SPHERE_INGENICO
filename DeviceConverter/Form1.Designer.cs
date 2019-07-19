@@ -42,8 +42,12 @@
             this.ApplicationlblDeviceOS = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.ApplicationlblStatus = new System.Windows.Forms.Label();
+            this.ApplicationgBxUpdate = new System.Windows.Forms.GroupBox();
+            this.ApplicationlblUpdate = new System.Windows.Forms.Label();
+            this.ApplicationbtnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ApplicationPicBoxWait)).BeginInit();
+            this.ApplicationgBxUpdate.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -79,7 +83,7 @@
             this.ApplicationPicBoxWait.Image = ((System.Drawing.Image)(resources.GetObject("ApplicationPicBoxWait.Image")));
             this.ApplicationPicBoxWait.Location = new System.Drawing.Point(26, 69);
             this.ApplicationPicBoxWait.Name = "ApplicationPicBoxWait";
-            this.ApplicationPicBoxWait.Size = new System.Drawing.Size(736, 401);
+            this.ApplicationPicBoxWait.Size = new System.Drawing.Size(736, 413);
             this.ApplicationPicBoxWait.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.ApplicationPicBoxWait.TabIndex = 3;
             this.ApplicationPicBoxWait.TabStop = false;
@@ -159,6 +163,7 @@
             // 
             // ApplicationlblStatus
             // 
+            this.ApplicationlblStatus.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.ApplicationlblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ApplicationlblStatus.Location = new System.Drawing.Point(23, 497);
             this.ApplicationlblStatus.Name = "ApplicationlblStatus";
@@ -167,13 +172,48 @@
             this.ApplicationlblStatus.Text = "STATUS:";
             this.ApplicationlblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // ApplicationgBxUpdate
+            // 
+            this.ApplicationgBxUpdate.Controls.Add(this.ApplicationbtnUpdate);
+            this.ApplicationgBxUpdate.Controls.Add(this.ApplicationlblUpdate);
+            this.ApplicationgBxUpdate.Location = new System.Drawing.Point(26, 373);
+            this.ApplicationgBxUpdate.Name = "ApplicationgBxUpdate";
+            this.ApplicationgBxUpdate.Size = new System.Drawing.Size(735, 98);
+            this.ApplicationgBxUpdate.TabIndex = 13;
+            this.ApplicationgBxUpdate.TabStop = false;
+            this.ApplicationgBxUpdate.Text = "Firmware Update";
+            this.ApplicationgBxUpdate.Visible = false;
+            // 
+            // ApplicationlblUpdate
+            // 
+            this.ApplicationlblUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApplicationlblUpdate.Location = new System.Drawing.Point(18, 37);
+            this.ApplicationlblUpdate.Name = "ApplicationlblUpdate";
+            this.ApplicationlblUpdate.Size = new System.Drawing.Size(246, 30);
+            this.ApplicationlblUpdate.TabIndex = 0;
+            this.ApplicationlblUpdate.Text = "UPDATE TO UIA";
+            this.ApplicationlblUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ApplicationlblUpdate.Visible = false;
+            // 
+            // ApplicationbtnUpdate
+            // 
+            this.ApplicationbtnUpdate.Location = new System.Drawing.Point(321, 37);
+            this.ApplicationbtnUpdate.Name = "ApplicationbtnUpdate";
+            this.ApplicationbtnUpdate.Size = new System.Drawing.Size(97, 30);
+            this.ApplicationbtnUpdate.TabIndex = 1;
+            this.ApplicationbtnUpdate.Text = "UPDATE";
+            this.ApplicationbtnUpdate.UseVisualStyleBackColor = true;
+            this.ApplicationbtnUpdate.Visible = false;
+            this.ApplicationbtnUpdate.Click += new System.EventHandler(this.ApplicationbtnUpdate_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(788, 567);
-            this.Controls.Add(this.ApplicationlblStatus);
             this.Controls.Add(this.ApplicationPicBoxWait);
+            this.Controls.Add(this.ApplicationgBxUpdate);
+            this.Controls.Add(this.ApplicationlblStatus);
             this.Controls.Add(this.ApplicationlblDeviceOS);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.ApplicationlblPort);
@@ -191,6 +231,7 @@
             this.Load += new System.EventHandler(this.OnFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ApplicationPicBoxWait)).EndInit();
+            this.ApplicationgBxUpdate.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,6 +252,9 @@
         private System.Windows.Forms.Label ApplicationlblDeviceOS;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label ApplicationlblStatus;
+        private System.Windows.Forms.GroupBox ApplicationgBxUpdate;
+        private System.Windows.Forms.Button ApplicationbtnUpdate;
+        private System.Windows.Forms.Label ApplicationlblUpdate;
     }
 }
 

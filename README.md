@@ -26,3 +26,4 @@ This an application to Configure Ingenico Devices.
 
 * 20190718 - Initial repository.
            - Cleaned up project and removed warnings.
+* 20190719 - Added UIA firmware updater.

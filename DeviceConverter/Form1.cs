@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using static IPA.DAL.RBADAL.Ingenico.Device;
 
 namespace IPA.MainApp
 {
@@ -44,6 +45,11 @@ namespace IPA.MainApp
         string ASSEMBLY_NAME = typeof(IPA.DAL.RBADAL.DeviceCfg).Assembly.FullName;
 
         #endregion
+
+        /********************************************************************************************************/
+        // FORM CONTROL
+        /********************************************************************************************************/
+        #region -- form control --
 
         public Form1()
         {
@@ -84,6 +90,8 @@ namespace IPA.MainApp
             }
         }
 
+        #endregion
+
         /********************************************************************************************************/
         // DELEGATES SECTION
         /********************************************************************************************************/
@@ -114,7 +122,13 @@ namespace IPA.MainApp
 
                 case NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE:
                 {
-                    StatusMessageUI(sender, args);
+                    StatusMessageUI(sender, args, false);
+                    break;
+                }
+
+                case NOTIFICATION_TYPE.NT_STATUS_MESSAGE_FINAL:
+                {
+                    StatusMessageUI(sender, args, true);
                     break;
                 }
             }
@@ -176,7 +190,7 @@ namespace IPA.MainApp
             }).Start();
         }
 
-        private void StatusMessageUI(object sender, DeviceNotificationEventArgs e)
+        private void StatusMessageUI(object sender, DeviceNotificationEventArgs e, bool final)
         {
             MethodInvoker mi = () =>
             {
@@ -196,6 +210,16 @@ namespace IPA.MainApp
                             }
                         }
                         this.ApplicationlblStatus.Text = $"STATUS: {status}";
+                        // Error handling in final state
+                        if(final)
+                        {
+                            this.ApplicationPicBoxWait.Enabled = false;
+                            this.ApplicationPicBoxWait.Visible = false;
+                            if(this.ApplicationbtnUpdate.Visible)
+                            { 
+                                this.ApplicationbtnUpdate.Enabled = true;
+                            }
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -215,6 +239,11 @@ namespace IPA.MainApp
         }
 
         #endregion
+
+        /********************************************************************************************************/
+        // DEVICE INTERACTION
+        /********************************************************************************************************/
+        #region -- device interaction --
 
         private void InitalizeDevice(bool unload = false)
         {
@@ -346,6 +375,8 @@ namespace IPA.MainApp
             }).Start();
         }
 
+        #endregion
+
         /********************************************************************************************************/
         // DEVICE ARTIFACTS
         /********************************************************************************************************/
@@ -396,11 +427,88 @@ namespace IPA.MainApp
                     {
                         this.ApplicationlblPort.Text = "UNKNOWN";
                     }
+                    // Firmware update
+                    if(config[0].Equals(Enum.GetName(typeof(DeviceOS), DeviceOS.UIA), StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        if(config[2].StartsWith("13.", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            this.ApplicationlblUpdate.Text = "UPDATE TO RBA v21.0.18";
+                        }
+                        else
+                        { 
+                            this.ApplicationlblUpdate.Text = "UPDATE TO UIA v13.1.12";
+                        }
+                        this.ApplicationgBxUpdate.Visible = true;
+                        this.ApplicationlblUpdate.Visible = true;
+                        this.ApplicationbtnUpdate.Visible = true;
+                    }
                 }
             }
             catch(Exception ex)
             {
                 Debug.WriteLine("main: SetConfiguration() exception={0}", (object)ex.Message);
+            }
+        }
+
+        #endregion
+
+        /********************************************************************************************************/
+        // FORM ACTIONS
+        /********************************************************************************************************/
+        #region -- form actions --
+
+        void UpdateUIAFirmware()
+        {
+                new Thread(() =>
+                {
+                    Thread.CurrentThread.IsBackground = true;
+
+                    try 
+                    { 
+                        // UIA firmware update
+                        devicePlugin.UpdateUIAFirmware();
+                    }
+                    catch(Exception ex)
+                    {
+                        Debug.WriteLine("main: UpdateUIAFirmware() exception={0}", (object)ex.Message);
+                    }
+
+                }).Start();
+        }
+
+        void UpdateRBAFirmware()
+        {
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+
+                try 
+                { 
+                    // UIA firmware update
+                    devicePlugin.UpdateRBAFirmware();
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine("main: UpdateRBAFirmware() exception={0}", (object)ex.Message);
+                }
+
+            }).Start();
+        }
+
+        private void ApplicationbtnUpdate_Click(object sender, EventArgs e)
+        {
+            this.ApplicationPicBoxWait.Enabled = true;
+            this.ApplicationPicBoxWait.Visible = true;
+            this.ApplicationlblStatus.Visible = true;
+            this.ApplicationbtnUpdate.Enabled = false;
+
+            if(this.ApplicationlblUpdate.Text.IndexOf("RBA") >= 0)
+            {
+                UpdateRBAFirmware();
+            }
+            else
+            {
+                UpdateUIAFirmware();
             }
         }
 

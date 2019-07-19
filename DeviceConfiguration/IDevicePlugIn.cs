@@ -18,5 +18,8 @@ namespace IPA.DAL.RBADAL
     string [] GetConfig();
     // NOTIFICATION
     void SetFormClosing(bool state);
+    // Firmare update
+    void UpdateUIAFirmware();
+    void UpdateRBAFirmware();
   }
 }

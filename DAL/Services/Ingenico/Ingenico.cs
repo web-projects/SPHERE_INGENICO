@@ -30,6 +30,14 @@ namespace IPA.DAL.RBADAL.Ingenico
 
         public event EventHandler<DeviceConnectionArgs> DeviceConnectionChanged;
         
+        public enum DeviceOS
+        {
+            [StringValue("UIA")]
+            UIA,
+            [StringValue("RBA")]
+            RBA
+        }
+
         public class DeviceEventArgs : EventArgs
         {
             public MESSAGE_ID MessageId { get; }

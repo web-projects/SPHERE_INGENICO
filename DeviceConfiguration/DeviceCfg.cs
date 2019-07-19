@@ -14,6 +14,7 @@ using System.Text;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using static IPA.DAL.RBADAL.Ingenico.Device;
 
 namespace IPA.DAL.RBADAL
 {
@@ -120,7 +121,7 @@ namespace IPA.DAL.RBADAL
 
                         if(device != null)
                         { 
-                            deviceInformation.DeviceOS = "RBA";
+                            deviceInformation.DeviceOS = Enum.GetName(typeof(DeviceOS), DeviceOS.RBA);
                             Debug.WriteLine("device INFO[OS]              : {0}", (object) deviceInformation.DeviceOS);
                             deviceInformation.ModelName = device.ModelName;
                             Debug.WriteLine("device INFO[Model Name]      : {0}", (object) deviceInformation.ModelName);
@@ -179,7 +180,6 @@ namespace IPA.DAL.RBADAL
             {
                 SetJavaCmd(ConfigurationManager.AppSettings["JavaCmd"] ?? string.Empty);
                 string directory = ConfigurationManager.AppSettings["UIAConverterDirectory"] ?? string.Empty;
-                //System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(directory);
                 string path = System.IO.Directory.GetCurrentDirectory(); 
 
                 string uiaVersion = string.Empty;
@@ -194,10 +194,8 @@ namespace IPA.DAL.RBADAL
                     object [] message = new [] { (object)SearchStatus.StatusIndex.UIA_INGENICO_DEVICE_SEARCH, $"  {modelPort.Model.Trim()}  on {modelPort.Port.Trim()}" };
                     NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = message });
 
-                    //string arguments = $"-jar \"{di.FullName}/UIAUtility.jar\" IDENTIFY \"{directory}/jpos/res/jpos.xml\" {modelPort.Model.Trim()} {modelPort.Port.Trim()}";
-                    //string response = RunExternalExe(di.FullName, javaCmd, arguments);
-                    string arguments = $"-jar \"{path}/UIAUtility/UIAUtility.jar\" IDENTIFY \"{path}/UIAUtility/jpos/res/jpos.xml\" {modelPort.Model.Trim()} {modelPort.Port.Trim()}";
-                    string response = RunExternalExe($"{path}/UIAUtility", javaCmd, arguments);
+                    string arguments = $"-jar \"{path}/UIAUtilities/UIAUtility.jar\" IDENTIFY \"{path}/UIAUtilities/jpos/res/jpos.xml\" {modelPort.Model.Trim()} {modelPort.Port.Trim()}";
+                    string response = RunExternalExe($"{path}/UIAUtilities", javaCmd, arguments);
 
                     if(!string.IsNullOrWhiteSpace(response))
                     { 
@@ -212,7 +210,7 @@ namespace IPA.DAL.RBADAL
                 { 
                     attached = true;
                     Debug.WriteLine("device information ----------------------------------------------------------------");
-                    deviceInformation.DeviceOS = "UIA";
+                    deviceInformation.DeviceOS = Enum.GetName(typeof(DeviceOS), DeviceOS.UIA);
                     Debug.WriteLine("device INFO[OS]              : {0}", (object) deviceInformation.DeviceOS);
                     deviceInformation.ModelName = model;
                     Debug.WriteLine("device INFO[Model Name]      : {0}", (object) deviceInformation.ModelName);
@@ -417,6 +415,34 @@ namespace IPA.DAL.RBADAL
         public override object InitializeLifetimeService()
         {
             return null;
+        }
+
+        public void UpdateUIAFirmware()
+        {
+            object [] message = new [] { (object)SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_UPDATE, $"  {deviceInformation.ModelName.Trim()}  on {deviceInformation.Port.Trim()}" };
+            NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = message });
+
+            string path = System.IO.Directory.GetCurrentDirectory();
+            //arguments: true displays the java window, NULL says don't specify a file, take the default
+            string arguments = $"-jar \"{path}/UIAUtilities/fileUploader.jar\" 7 true NULL {deviceInformation.ModelName}";
+            string response = RunExternalExe($"{path}/UIAUtilities", javaCmd, arguments);
+            if(!string.IsNullOrWhiteSpace(response))
+            {
+                int index = 0;
+                Debug.WriteLine($"device::UpdateUIAFirmware(): result={response}");
+                string failure = IPA.DAL.Helpers.StatusCode.GetDisplayMessage(SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_FAILED);
+                if((index = response.IndexOf("File Upload failed.")) >= 0)
+                {
+                    string buffer = response.Substring(index + failure.Length);
+                    message = new [] { (object)SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_FAILED, $" {response.Substring(failure.Length + index).Trim()}" };
+                    NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_FINAL, Message = message });
+                }
+            }
+        }
+
+        public void UpdateRBAFirmware()
+        {
+
         }
 
         #endregion

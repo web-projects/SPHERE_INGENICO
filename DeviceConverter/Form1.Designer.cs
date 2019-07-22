@@ -43,11 +43,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.ApplicationlblStatus = new System.Windows.Forms.Label();
             this.ApplicationgBxUpdate = new System.Windows.Forms.GroupBox();
-            this.ApplicationlblUpdate = new System.Windows.Forms.Label();
+            this.ApplicationgrpBox1 = new System.Windows.Forms.GroupBox();
+            this.ApplicationrBtn526 = new System.Windows.Forms.RadioButton();
+            this.ApplicationrBtn467 = new System.Windows.Forms.RadioButton();
             this.ApplicationbtnUpdate = new System.Windows.Forms.Button();
+            this.ApplicationlblUpdate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ApplicationPicBoxWait)).BeginInit();
             this.ApplicationgBxUpdate.SuspendLayout();
+            this.ApplicationgrpBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -174,6 +178,7 @@
             // 
             // ApplicationgBxUpdate
             // 
+            this.ApplicationgBxUpdate.Controls.Add(this.ApplicationgrpBox1);
             this.ApplicationgBxUpdate.Controls.Add(this.ApplicationbtnUpdate);
             this.ApplicationgBxUpdate.Controls.Add(this.ApplicationlblUpdate);
             this.ApplicationgBxUpdate.Location = new System.Drawing.Point(26, 373);
@@ -184,16 +189,39 @@
             this.ApplicationgBxUpdate.Text = "Firmware Update";
             this.ApplicationgBxUpdate.Visible = false;
             // 
-            // ApplicationlblUpdate
+            // ApplicationgrpBox1
             // 
-            this.ApplicationlblUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApplicationlblUpdate.Location = new System.Drawing.Point(18, 37);
-            this.ApplicationlblUpdate.Name = "ApplicationlblUpdate";
-            this.ApplicationlblUpdate.Size = new System.Drawing.Size(246, 30);
-            this.ApplicationlblUpdate.TabIndex = 0;
-            this.ApplicationlblUpdate.Text = "UPDATE TO UIA";
-            this.ApplicationlblUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ApplicationlblUpdate.Visible = false;
+            this.ApplicationgrpBox1.Controls.Add(this.ApplicationrBtn526);
+            this.ApplicationgrpBox1.Controls.Add(this.ApplicationrBtn467);
+            this.ApplicationgrpBox1.Location = new System.Drawing.Point(466, 28);
+            this.ApplicationgrpBox1.Name = "ApplicationgrpBox1";
+            this.ApplicationgrpBox1.Size = new System.Drawing.Size(216, 47);
+            this.ApplicationgrpBox1.TabIndex = 2;
+            this.ApplicationgrpBox1.TabStop = false;
+            this.ApplicationgrpBox1.Text = "RBA Firmware Version";
+            this.ApplicationgrpBox1.Visible = false;
+            // 
+            // ApplicationrBtn526
+            // 
+            this.ApplicationrBtn526.AutoSize = true;
+            this.ApplicationrBtn526.Location = new System.Drawing.Point(132, 16);
+            this.ApplicationrBtn526.Name = "ApplicationrBtn526";
+            this.ApplicationrBtn526.Size = new System.Drawing.Size(43, 17);
+            this.ApplicationrBtn526.TabIndex = 1;
+            this.ApplicationrBtn526.TabStop = true;
+            this.ApplicationrBtn526.Text = "526";
+            this.ApplicationrBtn526.UseVisualStyleBackColor = true;
+            // 
+            // ApplicationrBtn467
+            // 
+            this.ApplicationrBtn467.AutoSize = true;
+            this.ApplicationrBtn467.Location = new System.Drawing.Point(65, 16);
+            this.ApplicationrBtn467.Name = "ApplicationrBtn467";
+            this.ApplicationrBtn467.Size = new System.Drawing.Size(43, 17);
+            this.ApplicationrBtn467.TabIndex = 0;
+            this.ApplicationrBtn467.TabStop = true;
+            this.ApplicationrBtn467.Text = "467";
+            this.ApplicationrBtn467.UseVisualStyleBackColor = true;
             // 
             // ApplicationbtnUpdate
             // 
@@ -205,6 +233,17 @@
             this.ApplicationbtnUpdate.UseVisualStyleBackColor = true;
             this.ApplicationbtnUpdate.Visible = false;
             this.ApplicationbtnUpdate.Click += new System.EventHandler(this.ApplicationbtnUpdate_Click);
+            // 
+            // ApplicationlblUpdate
+            // 
+            this.ApplicationlblUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApplicationlblUpdate.Location = new System.Drawing.Point(18, 37);
+            this.ApplicationlblUpdate.Name = "ApplicationlblUpdate";
+            this.ApplicationlblUpdate.Size = new System.Drawing.Size(246, 30);
+            this.ApplicationlblUpdate.TabIndex = 0;
+            this.ApplicationlblUpdate.Text = "UPDATE TO UIA";
+            this.ApplicationlblUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ApplicationlblUpdate.Visible = false;
             // 
             // Form1
             // 
@@ -232,6 +271,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ApplicationPicBoxWait)).EndInit();
             this.ApplicationgBxUpdate.ResumeLayout(false);
+            this.ApplicationgrpBox1.ResumeLayout(false);
+            this.ApplicationgrpBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,6 +296,9 @@
         private System.Windows.Forms.GroupBox ApplicationgBxUpdate;
         private System.Windows.Forms.Button ApplicationbtnUpdate;
         private System.Windows.Forms.Label ApplicationlblUpdate;
+        private System.Windows.Forms.GroupBox ApplicationgrpBox1;
+        private System.Windows.Forms.RadioButton ApplicationrBtn526;
+        private System.Windows.Forms.RadioButton ApplicationrBtn467;
     }
 }
 

@@ -433,10 +433,13 @@ namespace IPA.MainApp
                         if(config[2].StartsWith("13.", StringComparison.CurrentCultureIgnoreCase))
                         {
                             this.ApplicationlblUpdate.Text = "UPDATE TO RBA v21.0.18";
+                            this.ApplicationrBtn467.Checked = true;
+                            this.ApplicationgrpBox1.Visible = true;
                         }
                         else
                         { 
                             this.ApplicationlblUpdate.Text = "UPDATE TO UIA v13.1.12";
+                            this.ApplicationgrpBox1.Visible = false;
                         }
                         this.ApplicationgBxUpdate.Visible = true;
                         this.ApplicationlblUpdate.Visible = true;
@@ -484,8 +487,8 @@ namespace IPA.MainApp
 
                 try 
                 { 
-                    // UIA firmware update
-                    devicePlugin.UpdateRBAFirmware();
+                    // RBA firmware update
+                    devicePlugin.UpdateRBAFirmware(ApplicationrBtn467.Checked ? 467 : 526);
                 }
                 catch(Exception ex)
                 {

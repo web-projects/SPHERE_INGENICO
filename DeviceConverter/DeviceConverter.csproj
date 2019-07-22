@@ -92,6 +92,102 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="RBAUtilities\firmware\467\iPP320\v3\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iPP320\v3\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iPP320\v4\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iPP320\v4\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iPP350\v3\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iPP350\v3\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iPP350\v4\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iPP350\v4\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iSC250\v3\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iSC250\v3\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iSC250\v4\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iSC250\v4\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iSC480\v3\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iSC480\v3\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iSC480\v4\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\467\iSC480\v4\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iPP320\v3\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iPP320\v3\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iPP320\v4\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iPP320\v4\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iPP350\v3\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iPP350\v3\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iPP350\v4\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iPP350\v4\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iSC250\v3\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iSC250\v3\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iSC250\v4\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iSC250\v4\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iSC480\v3\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iSC480\v3\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iSC480\v4\EFTL0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RBAUtilities\firmware\526\iSC480\v4\EFTP0007">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIAUtilities\jpos\res\jpos.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -104,6 +200,9 @@
     <Content Include="Assets\TC-IPA-Shield.ico" />
     <Content Include="Assets\TC-logo.png" />
     <Content Include="Assets\TC-WAIT.gif" />
+    <Content Include="RBAUtilities\firmware\ibmeftdl.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TC-IPA-Shield.ico" />
     <Content Include="UIAUtilities\fileUploader.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -126,5 +225,6 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

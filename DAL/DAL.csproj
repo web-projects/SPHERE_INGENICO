@@ -76,12 +76,14 @@
     <Compile Include="Data.Entity\StatusCode.cs" />
     <Compile Include="Data.Other\DeviceModel.cs" />
     <Compile Include="Device.cs" />
+    <Compile Include="Helpers\DeviceInformation.cs" />
     <Compile Include="Helpers\Enumerations.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\SearchStatus.cs" />
     <Compile Include="Helpers\StatusCode.cs" />
     <Compile Include="Helpers\StatusCodeEnum.cs" />
     <Compile Include="Helpers\StringValue.cs" />
+    <Compile Include="Helpers\Utility.cs" />
     <Compile Include="Models\NotificationEventArgs.cs" />
     <Compile Include="Models\TimerEventArgs.cs" />
     <Compile Include="Models\UpdateEventArgs.cs" />

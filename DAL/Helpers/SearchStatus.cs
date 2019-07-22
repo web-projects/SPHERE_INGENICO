@@ -18,8 +18,10 @@ namespace IPA.DAL.RBADAL
             UIA_INGENICO_DEVICE_SEARCH = 102,
             [System.ComponentModel.Description("updating UIA firmware...")]
             UIA_INGENICO_FIRMWARE_UPDATE = 103,
-            [System.ComponentModel.Description("File Upload failed.")]
+            [System.ComponentModel.Description("UIA Firmware Update failed.")]
             UIA_INGENICO_FIRMWARE_FAILED = 104,
+            [System.ComponentModel.Description("RBA Firmware Update failed.")]
+            RBA_INGENICO_FIRMWARE_FAILED = 105,
         }
     }
 }

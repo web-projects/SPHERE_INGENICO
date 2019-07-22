@@ -15,6 +15,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using static IPA.DAL.RBADAL.Ingenico.Device;
+using IPA.DAL.Helpers;
 
 namespace IPA.DAL.RBADAL
 {
@@ -31,7 +32,7 @@ namespace IPA.DAL.RBADAL
         const string IdTechString = "idtech";
 
         const string v4PostText = "v4";
-        const string v3PostText = "";
+        const string v3PostText = "v3";
 
         bool attached;
         bool formClosing;
@@ -39,6 +40,8 @@ namespace IPA.DAL.RBADAL
         Device Device = new Device();
 
         static DeviceInformation deviceInformation;
+
+        Utility utility = new Utility();
 
         // Device Events back to Main Form
         public event EventHandler<DeviceNotificationEventArgs> OnDeviceNotification;
@@ -51,10 +54,6 @@ namespace IPA.DAL.RBADAL
         public string PluginName { get { return DevicePluginName; } }
 
         string modelFamily;
-        string javaCmd;
-
-        StringBuilder stdOutput;
-        StringBuilder stdError;
 
         #endregion
 
@@ -178,7 +177,7 @@ namespace IPA.DAL.RBADAL
 
             if (principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
             {
-                SetJavaCmd(ConfigurationManager.AppSettings["JavaCmd"] ?? string.Empty);
+                utility.SetJavaCmd(ConfigurationManager.AppSettings["JavaCmd"] ?? string.Empty);
                 string directory = ConfigurationManager.AppSettings["UIAConverterDirectory"] ?? string.Empty;
                 string path = System.IO.Directory.GetCurrentDirectory(); 
 
@@ -195,7 +194,7 @@ namespace IPA.DAL.RBADAL
                     NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = message });
 
                     string arguments = $"-jar \"{path}/UIAUtilities/UIAUtility.jar\" IDENTIFY \"{path}/UIAUtilities/jpos/res/jpos.xml\" {modelPort.Model.Trim()} {modelPort.Port.Trim()}";
-                    string response = RunExternalExe($"{path}/UIAUtilities", javaCmd, arguments);
+                    string response = utility.RunExternalExe($"{path}/UIAUtilities", utility.GetJavaCmd(), arguments);
 
                     if(!string.IsNullOrWhiteSpace(response))
                     { 
@@ -214,6 +213,8 @@ namespace IPA.DAL.RBADAL
                     Debug.WriteLine("device INFO[OS]              : {0}", (object) deviceInformation.DeviceOS);
                     deviceInformation.ModelName = model;
                     Debug.WriteLine("device INFO[Model Name]      : {0}", (object) deviceInformation.ModelName);
+                    deviceInformation.ModelVersion = modelVer;
+                    Debug.WriteLine("device INFO[Model Version]   : {0}", (object) deviceInformation.ModelVersion);
                     deviceInformation.SerialNumber = serialNumber;
                     Debug.WriteLine("device INFO[Serial Number]   : {0}", (object) deviceInformation.SerialNumber);
                     deviceInformation.FirmwareVersion = uiaVersion;
@@ -242,207 +243,10 @@ namespace IPA.DAL.RBADAL
             return expectedResponses;
         }
 
-        void OutputDataHandler(object sendingProcess, DataReceivedEventArgs e)
-        {
-            if (!String.IsNullOrWhiteSpace(e.Data) && !e.Data.StartsWith("Downloading "))
-            {
-                Debug.WriteLine($"PO: {e.Data}");
-                stdOutput.AppendLine(e.Data);
-                if (e.Data.Contains("Skipping"))
-                    Console.WriteLine(e.Data);
-            }
-        }
-
-        void ErrorDataHandler(object sendingProcess, DataReceivedEventArgs e)
-        {
-            if (!String.IsNullOrWhiteSpace(e.Data))
-            {
-                Debug.WriteLine($"PE: {e.Data}");
-                stdError.AppendLine(e.Data);
-            }
-        }
-
-        string RunExternalExe(string directory, string filename, string arguments = null, string[] environmentVariables = null)
-        {
-            Debug.WriteLine($"{directory}--{filename} {arguments ?? ""}");
-            Process process = new Process();
-
-            process.StartInfo.FileName = filename;
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = true;
-            process.StartInfo.RedirectStandardInput = true;
-            if (environmentVariables != null)
-            {
-                for (int i = 1; i < environmentVariables.Length; i += 2)
-                {
-                    process.StartInfo.EnvironmentVariables[environmentVariables[i - 1]] = environmentVariables[i];
-                }
-            }
-
-            stdOutput = new StringBuilder(10000);   //stdOutput gets large, so start the default value as large.
-            stdError = new StringBuilder(100);      //stdError normally does not get large, so no need to start that off big.
-
-            process.OutputDataReceived += new DataReceivedEventHandler(OutputDataHandler);
-            process.ErrorDataReceived += new DataReceivedEventHandler(OutputDataHandler);
-
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            if (!string.IsNullOrEmpty(arguments))
-            {
-                process.StartInfo.Arguments = arguments;
-            }
-            process.StartInfo.WorkingDirectory = directory;
-            process.StartInfo.RedirectStandardInput = true;
-
-            try
-            {
-                bool killingLogged = false;
-                DateTime startTime = DateTime.Now;
-                process.Start();
-                process.BeginOutputReadLine();
-                process.BeginErrorReadLine();
-                while (process.HasExited != true)
-                {
-                    System.Threading.Thread.Sleep(1000);
-                    if((DateTime.Now - startTime).TotalMinutes < 12)
-                    { 
-                         continue;
-                    }
-                    if (process.HasExited != true)
-                    { 
-                        if (!killingLogged)
-                        {
-                            Debug.WriteLine($"Terminating process {process.StartInfo.FileName}");
-                            killingLogged = true;
-                        }
-                        process.Kill();
-                    }
-                    if ((DateTime.Now - startTime).TotalMinutes < 13)
-                    { 
-                        continue;
-                    }
-                    Debug.WriteLine($"Aborting process wait {process.StartInfo.FileName}");
-                    break;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception($"OS error while executing {(Format(filename, arguments))}: {e.Message}", e);
-            }
-
-            if (process.ExitCode == 0)
-            {
-                Debug.WriteLine("Process exited normally.");
-                return stdOutput.ToString();
-            }
-            else if (process.ExitCode < 0)
-            {
-                Debug.WriteLine($"Process terminated abnormally {process.StartInfo.FileName}.");
-                return stdOutput.ToString();  //Exit cleanly, don't throw, which breaks current execution pattern.
-            }
-            else
-            {
-                var message = new StringBuilder(256);
-                if (stdOutput.Length != 0)
-                {
-                    message.AppendLine("Std output:");
-                    message.AppendLine(stdOutput.ToString());
-                }
-
-                if (!string.IsNullOrEmpty(stdError.ToString()))
-                {
-                    message.AppendLine(stdError.ToString());
-                }
-
-                throw new Exception($"{(Format(filename, arguments))} finished with exit code = {process.ExitCode}: {message}");
-            }
-        }
-
-        string RunExternalExeElevated(string directory, string filename, string arguments = null, string[] environmentVariables = null)
-        {
-            Debug.WriteLine($"{directory}--{filename} {arguments ?? ""}");
-
-            var output = Path.GetTempFileName();
-            var process = Process.Start(new ProcessStartInfo
-            {
-                FileName  = filename,
-                Arguments = arguments,
-                Verb      = "runas",
-                CreateNoWindow = false,
-                UseShellExecute = true
-            });
-
-            process.WaitForExit();
-
-            string response = File.ReadAllText(output);
-            File.Delete(output);
-
-            if (process.ExitCode == 0)
-            {
-                Debug.WriteLine("Process exited normally.");
-                return response;
-            }
-            else if (process.ExitCode < 0)
-            {
-                Debug.WriteLine($"Process terminated abnormally {process.StartInfo.FileName}.");
-                return stdOutput.ToString();  //Exit cleanly, don't throw, which breaks current execution pattern.
-            }
-            else
-            {
-                var message = new StringBuilder(256);
-                if (stdOutput.Length != 0)
-                {
-                    message.AppendLine("Std output:");
-                    message.AppendLine(stdOutput.ToString());
-                }
-
-                if (!string.IsNullOrEmpty(stdError.ToString()))
-                {
-                    message.AppendLine(stdError.ToString());
-                }
-
-                throw new Exception($"{(Format(filename, arguments))} finished with exit code = {process.ExitCode}: {message}");
-            }
-        }
-
-        string Format(string filename, string arguments)
-        {
-            return $"'{filename}{(((string.IsNullOrEmpty(arguments)) ? string.Empty : " " + arguments))}'";
-        }
-
         [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.Infrastructure)]
         public override object InitializeLifetimeService()
         {
             return null;
-        }
-
-        public void UpdateUIAFirmware()
-        {
-            object [] message = new [] { (object)SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_UPDATE, $"  {deviceInformation.ModelName.Trim()}  on {deviceInformation.Port.Trim()}" };
-            NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = message });
-
-            string path = System.IO.Directory.GetCurrentDirectory();
-            //arguments: true displays the java window, NULL says don't specify a file, take the default
-            string arguments = $"-jar \"{path}/UIAUtilities/fileUploader.jar\" 7 true NULL {deviceInformation.ModelName}";
-            string response = RunExternalExe($"{path}/UIAUtilities", javaCmd, arguments);
-            if(!string.IsNullOrWhiteSpace(response))
-            {
-                int index = 0;
-                Debug.WriteLine($"device::UpdateUIAFirmware(): result={response}");
-                string failure = IPA.DAL.Helpers.StatusCode.GetDisplayMessage(SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_FAILED);
-                if((index = response.IndexOf("File Upload failed.")) >= 0)
-                {
-                    string buffer = response.Substring(index + failure.Length);
-                    message = new [] { (object)SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_FAILED, $" {response.Substring(failure.Length + index).Trim()}" };
-                    NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_FINAL, Message = message });
-                }
-            }
-        }
-
-        public void UpdateRBAFirmware()
-        {
-
         }
 
         #endregion
@@ -573,26 +377,6 @@ namespace IPA.DAL.RBADAL
         /********************************************************************************************************/
         #region -- internal commands --
 
-        void SetJavaCmd(string inCmd)
-        {
-            var javaLocations = new string[]
-            {
-                @".\Resources\JavaFiles\FirmwareConverter\devices\ingenico\jre7\bin\java.exe",
-                @"C:\TrustCommerce\devices\ingenico\jre7\bin\java.exe",
-                @"C:\TrustCommerce\TCIPADALInstallation\TCIPAJDal\devices\ingenico\jre7\bin\java.exe",
-                inCmd
-            };
-            foreach (string cmd in javaLocations)
-            {
-                if (System.IO.File.Exists(cmd))
-                {
-                    System.IO.FileInfo fi = new System.IO.FileInfo(cmd);
-                    javaCmd = fi.FullName;
-                    break;
-                }
-            }
-        }
-
         string[] GetAvailablePorts()
         {
             return System.IO.Ports.SerialPort.GetPortNames();
@@ -664,6 +448,10 @@ namespace IPA.DAL.RBADAL
                 {
                     ConvertFullModelToDevVer(model, out model, out modelVer);
                 }
+                else
+                {
+                    modelVer = v3PostText;
+                }
                 portFound = RetrieveComPort(response);
                 if (RetrieveData(response, "SerialNumber", out serialNumber))
                 {
@@ -722,50 +510,35 @@ namespace IPA.DAL.RBADAL
                     modelVersion = v4PostText;
             }
         }
+
+        public void UpdateUIAFirmware()
+        {
+            object [] message = new [] { (object)SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_UPDATE, $"  {deviceInformation.ModelName.Trim()}  on {deviceInformation.Port.Trim()}" };
+            NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = message });
+
+            string response = utility.UpdateUIAFirmware(deviceInformation);
+            if(!string.IsNullOrEmpty(response))
+            {
+                message = new [] { (object)SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_FAILED, $" {response}" };
+                NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_FINAL, Message = message });
+            }
+        }
+
+        public void UpdateRBAFirmware(int version)
+        {
+            string response = utility.UpdateRBAFirmware(deviceInformation, version);
+            if(!string.IsNullOrEmpty(response))
+            {
+                int index = response.ToString().IndexOf("ERROR");
+                if(index != -1)
+                {
+                    string error = response.Substring(index).Split(new string[] {"\n", "\r\n"}, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+                    object [] message = new [] { (object)SearchStatus.StatusIndex.RBA_INGENICO_FIRMWARE_FAILED, $" {error}" };
+                    NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_FINAL, Message = message });
+                }
+            }
+        }
+
         #endregion
     }
-
-    /********************************************************************************************************/
-    // DEVICE INFORMATION
-    /********************************************************************************************************/
-    #region -- device information --
-    internal class DeviceInformation
-    {
-        internal string DeviceOS;
-        internal string SerialNumber;
-        internal string FirmwareVersion;
-        internal string ModelName;
-        internal string Port;
-        internal bool emvConfigSupported;
-    }
-    public class USBDeviceInfo
-    {
-        public USBDeviceInfo(string deviceID, string pnpDeviceID, string description)
-        {
-            this.DeviceID = deviceID;
-            this.PnpDeviceID = pnpDeviceID;
-            this.Description = description;
-        }
-        public string DeviceID { get; private set; }
-        public string PnpDeviceID { get; private set; }
-        public string Description { get; private set; }
-    }
-    public struct BoolStringDuple
-    {
-        public bool Item1 { get; set; }
-        public string Item2 { get; set; }
-        public BoolStringDuple(bool item1, string item2)
-        {
-            Item1 = item1;
-            Item2 = item2;
-        }
-    }
-
-    public struct ModelPort
-    {
-        public string Model { get; set; }
-        public string Port { get; set; }
-    }
-
-    #endregion
 }

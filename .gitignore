@@ -14,7 +14,7 @@
 !/tmp/.keep
 
 # Ignore db files
-/.vs
+.vs/*
 
 # Ignore build files
 DAL/bin/
@@ -23,7 +23,4 @@ DeviceConfiguration/bin/
 DeviceConfiguration/obj/
 DeviceConverter/bin/
 DeviceConverter/obj/
-/sdk/*.dll
-/auto-generated/*.dll
-
-run/TerminalData.*
+sdk/*

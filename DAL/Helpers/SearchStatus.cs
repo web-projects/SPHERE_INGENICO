@@ -20,8 +20,10 @@ namespace IPA.DAL.RBADAL
             UIA_INGENICO_FIRMWARE_UPDATE = 103,
             [System.ComponentModel.Description("UIA Firmware Update failed.")]
             UIA_INGENICO_FIRMWARE_FAILED = 104,
+            [System.ComponentModel.Description("Device rebooting...")]
+            INGENICO_DEVICE_REBOOTING = 105,
             [System.ComponentModel.Description("RBA Firmware Update failed.")]
-            RBA_INGENICO_FIRMWARE_FAILED = 105,
+            RBA_INGENICO_FIRMWARE_FAILED = 106,
         }
     }
 }

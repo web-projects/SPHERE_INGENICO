@@ -66,6 +66,12 @@ namespace IPA.DAL.RBADAL
         {
         }
 
+        [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.Infrastructure)]
+        public override object InitializeLifetimeService()
+        {
+            return null;
+        }
+
         public void DeviceInit()
         {
             DevicePluginName = "DeviceCfg";
@@ -193,8 +199,8 @@ namespace IPA.DAL.RBADAL
                     object [] message = new [] { (object)SearchStatus.StatusIndex.UIA_INGENICO_DEVICE_SEARCH, $"  {modelPort.Model.Trim()}  on {modelPort.Port.Trim()}" };
                     NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = message });
 
-                    string arguments = $"-jar \"{path}/UIAUtilities/UIAUtility.jar\" IDENTIFY \"{path}/UIAUtilities/jpos/res/jpos.xml\" {modelPort.Model.Trim()} {modelPort.Port.Trim()}";
-                    string response = utility.RunExternalExe($"{path}/UIAUtilities", utility.GetJavaCmd(), arguments);
+                    string arguments = $"-jar \"{path}\\UIAUtilities\\UIAUtility.jar\" IDENTIFY \"{path}\\UIAUtilities\\jpos\\res\\jpos.xml\" {modelPort.Model.Trim()} {modelPort.Port.Trim()}";
+                    string response = utility.RunExternalExe($"{path}\\UIAUtilities", utility.GetJavaCmd(), false, arguments);
 
                     if(!string.IsNullOrWhiteSpace(response))
                     { 
@@ -241,12 +247,6 @@ namespace IPA.DAL.RBADAL
             }
 
             return expectedResponses;
-        }
-
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.Infrastructure)]
-        public override object InitializeLifetimeService()
-        {
-            return null;
         }
 
         #endregion
@@ -516,11 +516,29 @@ namespace IPA.DAL.RBADAL
             object [] message = new [] { (object)SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_UPDATE, $"  {deviceInformation.ModelName.Trim()}  on {deviceInformation.Port.Trim()}" };
             NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = message });
 
+            // disconnect regardless of connection state (to remove notifications)
+            Device.Disconnect();
+
             string response = utility.UpdateUIAFirmware(deviceInformation);
             if(!string.IsNullOrEmpty(response))
             {
                 message = new [] { (object)SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_FAILED, $" {response}" };
                 NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_FINAL, Message = message });
+            }
+            else
+            {
+                message = new [] { (object)SearchStatus.StatusIndex.INGENICO_DEVICE_REBOOTING };
+                NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_FINAL, Message = message });
+
+                new Thread(() =>
+                {
+                    Thread.CurrentThread.IsBackground = true;
+                    Thread.Sleep(30000);
+
+                    // Scan for device on reboot
+                    DeviceRemovedHandler();
+
+                }).Start();
             }
         }
 

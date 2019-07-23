@@ -13,6 +13,7 @@ namespace IPA.DAL.Helpers
     public class Utility
     {
         readonly char[] commaSeparator = new char[] { ',' };
+        readonly string RBA_UPDATE_UTIL = "ibmeftdl";
 
         string javaCmd;
         string rba_install_cmd;
@@ -182,25 +183,28 @@ namespace IPA.DAL.Helpers
             return null;
         }
 
-        void KillProcess(string processName) //dont pass process extension
+        void KillProcess(string [] processNames)
         {
-            Process process = null;
-            int counter = 0;
-            do
+            foreach (string processName in processNames)
             {
-                try
+                Process process = null;
+                int counter = 0;
+                do
                 {
-                    process = GetProcess(processName);
-                    if (process != null)
-                    { 
-                       process.Kill();
+                    try
+                    {
+                        process = GetProcess(processName);
+                        if (process != null)
+                        { 
+                           process.Kill();
+                        }
                     }
-                }
-                catch
-                {
-                }
-                System.Threading.Thread.Sleep(1000);
-            } while (process != null && counter++ < 300);
+                    catch
+                    {
+                    }
+                    System.Threading.Thread.Sleep(1000);
+                } while (process != null && counter++ < 300);
+            }
         }
 
         internal static List<Process> GetCurrentProcesses()
@@ -335,7 +339,7 @@ namespace IPA.DAL.Helpers
             return javaCmd;
         }
 
-        public string RunExternalExe(string directory, string filename, string arguments = null, string[] environmentVariables = null)
+        public string RunExternalExe(string directory, string filename, bool abortOnError, string arguments = null, string[] environmentVariables = null)
         {
             Debug.WriteLine($"{directory}--{filename} {arguments ?? ""}");
             Process process = new Process();
@@ -380,7 +384,7 @@ namespace IPA.DAL.Helpers
                     System.Threading.Thread.Sleep(1000);
                     if((DateTime.Now - startTime).TotalMinutes < 12)
                     { 
-                        if(stdOutput.ToString().IndexOf("ERROR") == -1)
+                        if(!abortOnError || stdOutput.ToString().IndexOf("ERROR") == -1)
                         {
                             continue;
                         }
@@ -396,7 +400,7 @@ namespace IPA.DAL.Helpers
                     }
                     if ((DateTime.Now - startTime).TotalMinutes < 13)
                     { 
-                        if(stdOutput.ToString().IndexOf("ERROR") == -1)
+                        if(!abortOnError || stdOutput.ToString().IndexOf("ERROR") == -1)
                         {
                             continue;
                         }
@@ -573,13 +577,12 @@ namespace IPA.DAL.Helpers
 
         public string UpdateUIAFirmware(DeviceInformation deviceInformation)
         {
-            string result = string.Empty;
             string path = System.IO.Directory.GetCurrentDirectory();
             //arguments: true displays the java window, NULL says don't specify a file, take the default
-            //string arguments = $"-jar \"{path}/UIAUtilities/fileUploader.jar\" 7 true NULL {deviceInformation.ModelName}";
-            string arguments = $"-jar \"C:/TrustCommerce/jDAL/fileUploader.jar\" 7 true NULL {deviceInformation.ModelName}";
-            //string response = RunExternalExe($"{path}/UIAUtilities", javaCmd, arguments);
-            string response = RunExternalExe($"C:/TrustCommerce/jDAL", javaCmd, arguments);
+            string arguments = $"-jar \"{path}\\UIAUtilities\\fileUploader.jar\" 7 true NULL {deviceInformation.ModelName.Trim()}";
+            Debug.WriteLine($"device: UIA update args={arguments}");
+            string response = RunExternalExe($"{path}\\UIAUtilities", javaCmd, false, arguments);
+
             if(!string.IsNullOrWhiteSpace(response))
             {
                 int index = 0;
@@ -587,11 +590,11 @@ namespace IPA.DAL.Helpers
                 string failure = IPA.DAL.Helpers.StatusCode.GetDisplayMessage(SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_FAILED);
                 if((index = response.IndexOf("File Upload failed.")) >= 0)
                 {
-                    result = response.Substring(failure.Length + index).Trim();
+                    response = response.Substring(failure.Length + index).Trim();
                 }
             }
 
-            return result;
+            return response;
         }
 
         public string UpdateRBAFirmware(DeviceInformation deviceInformation, int version)
@@ -608,17 +611,17 @@ namespace IPA.DAL.Helpers
                 CreateDownloadBat(batchToRun, TCFinalPort);
                 if(File.Exists(batchToRun))
                 {
-                    KillProcess("ibmeftdl");
+                    KillProcess(new string [] { RBA_UPDATE_UTIL + ".exe", RBA_UPDATE_UTIL });
 
                     // Copy ibmeftdl to executing directory
-                    string firmwareSrc = Path.Combine(firmwareDir, "ibmeftdl.exe");
+                    string firmwareSrc = Path.Combine(firmwareDir, RBA_UPDATE_UTIL + ".exe");
 
                     if(File.Exists(firmwareSrc))
                     {
-                        string firmwareDst = Path.Combine(destinationDirectory, "ibmeftdl.exe");
+                        string firmwareDst = Path.Combine(destinationDirectory, RBA_UPDATE_UTIL + ".exe");
                         File.Copy(firmwareSrc, firmwareDst, true);
                         var curProcesses = GetCurrentProcesses();
-                        result = RunExternalExe(destinationDirectory, batchToRun);
+                        result = RunExternalExe(destinationDirectory, batchToRun, true);
                         if(result.ToString().IndexOf("ERROR") == -1)
                         {
                             WaitForIngenicoDevice(curProcesses, TCFinalPort, string.Empty);

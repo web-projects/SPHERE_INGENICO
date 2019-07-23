@@ -411,18 +411,19 @@ namespace IPA.MainApp
                     this.ApplicationlblSerialNumber.Text = config[1];
                     this.ApplicationFirmwarelblVersion.Text = config[2];
                     this.ApplicationlblModelName.Text = config[3];
+                    this.ApplicationlblHardwareVersion.Text = config[4];
 
                     // value expected: either dashed or space separated
                     string [] worker = null;
-                    if(config[4] != null)
+                    if(config[5] != null)
                     {
-                        if(config[4].Trim().Contains(' '))
+                        if(config[5].Trim().Contains(' '))
                         {
-                            worker = config[4].Trim().Split(' ');
+                            worker = config[5].Trim().Split(' ');
                         }
                         else
                         {
-                            worker = config[4].Trim().Split('-');
+                            worker = config[5].Trim().Split('-');
                         }
                     }
                     if(worker != null)

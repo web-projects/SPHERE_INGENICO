@@ -271,6 +271,7 @@ namespace IPA.DAL.RBADAL
                                  deviceInformation.SerialNumber,
                                  deviceInformation.FirmwareVersion,
                                  deviceInformation.ModelName,
+                                 deviceInformation.ModelVersion,
                                  deviceInformation.Port
             };
 

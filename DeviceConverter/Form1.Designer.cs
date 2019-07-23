@@ -48,6 +48,8 @@
             this.ApplicationrBtnFDRC = new System.Windows.Forms.RadioButton();
             this.ApplicationbtnUpdate = new System.Windows.Forms.Button();
             this.ApplicationlblUpdate = new System.Windows.Forms.Label();
+            this.ApplicationlblHardwareVersion = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ApplicationPicBoxWait)).BeginInit();
             this.ApplicationgroupBoxFirmwareUpdate.SuspendLayout();
@@ -67,7 +69,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 151);
+            this.label1.Location = new System.Drawing.Point(57, 147);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 1;
@@ -76,7 +78,7 @@
             // ApplicationlblSerialNumber
             // 
             this.ApplicationlblSerialNumber.AutoSize = true;
-            this.ApplicationlblSerialNumber.Location = new System.Drawing.Point(158, 151);
+            this.ApplicationlblSerialNumber.Location = new System.Drawing.Point(171, 147);
             this.ApplicationlblSerialNumber.Name = "ApplicationlblSerialNumber";
             this.ApplicationlblSerialNumber.Size = new System.Drawing.Size(65, 13);
             this.ApplicationlblSerialNumber.TabIndex = 2;
@@ -96,7 +98,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 209);
+            this.label2.Location = new System.Drawing.Point(57, 192);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 13);
             this.label2.TabIndex = 4;
@@ -105,7 +107,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 267);
+            this.label3.Location = new System.Drawing.Point(57, 237);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 5;
@@ -114,7 +116,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(44, 325);
+            this.label4.Location = new System.Drawing.Point(57, 327);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 6;
@@ -123,7 +125,7 @@
             // ApplicationFirmwarelblVersion
             // 
             this.ApplicationFirmwarelblVersion.AutoSize = true;
-            this.ApplicationFirmwarelblVersion.Location = new System.Drawing.Point(158, 209);
+            this.ApplicationFirmwarelblVersion.Location = new System.Drawing.Point(171, 192);
             this.ApplicationFirmwarelblVersion.Name = "ApplicationFirmwarelblVersion";
             this.ApplicationFirmwarelblVersion.Size = new System.Drawing.Size(65, 13);
             this.ApplicationFirmwarelblVersion.TabIndex = 7;
@@ -132,7 +134,7 @@
             // ApplicationlblModelName
             // 
             this.ApplicationlblModelName.AutoSize = true;
-            this.ApplicationlblModelName.Location = new System.Drawing.Point(158, 267);
+            this.ApplicationlblModelName.Location = new System.Drawing.Point(171, 237);
             this.ApplicationlblModelName.Name = "ApplicationlblModelName";
             this.ApplicationlblModelName.Size = new System.Drawing.Size(65, 13);
             this.ApplicationlblModelName.TabIndex = 8;
@@ -141,7 +143,7 @@
             // ApplicationlblPort
             // 
             this.ApplicationlblPort.AutoSize = true;
-            this.ApplicationlblPort.Location = new System.Drawing.Point(158, 325);
+            this.ApplicationlblPort.Location = new System.Drawing.Point(171, 327);
             this.ApplicationlblPort.Name = "ApplicationlblPort";
             this.ApplicationlblPort.Size = new System.Drawing.Size(65, 13);
             this.ApplicationlblPort.TabIndex = 9;
@@ -150,7 +152,7 @@
             // ApplicationlblDeviceOS
             // 
             this.ApplicationlblDeviceOS.AutoSize = true;
-            this.ApplicationlblDeviceOS.Location = new System.Drawing.Point(158, 96);
+            this.ApplicationlblDeviceOS.Location = new System.Drawing.Point(171, 102);
             this.ApplicationlblDeviceOS.Name = "ApplicationlblDeviceOS";
             this.ApplicationlblDeviceOS.Size = new System.Drawing.Size(65, 13);
             this.ApplicationlblDeviceOS.TabIndex = 11;
@@ -159,7 +161,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(44, 96);
+            this.label6.Location = new System.Drawing.Point(57, 102);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(62, 13);
             this.label6.TabIndex = 10;
@@ -245,12 +247,32 @@
             this.ApplicationlblUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ApplicationlblUpdate.Visible = false;
             // 
+            // ApplicationlblHardwareVersion
+            // 
+            this.ApplicationlblHardwareVersion.AutoSize = true;
+            this.ApplicationlblHardwareVersion.Location = new System.Drawing.Point(171, 282);
+            this.ApplicationlblHardwareVersion.Name = "ApplicationlblHardwareVersion";
+            this.ApplicationlblHardwareVersion.Size = new System.Drawing.Size(65, 13);
+            this.ApplicationlblHardwareVersion.TabIndex = 15;
+            this.ApplicationlblHardwareVersion.Text = "UNKNOWN";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(57, 282);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(94, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Hardware Version:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(788, 567);
             this.Controls.Add(this.ApplicationPicBoxWait);
+            this.Controls.Add(this.ApplicationlblHardwareVersion);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.ApplicationgroupBoxFirmwareUpdate);
             this.Controls.Add(this.ApplicationlblStatus);
             this.Controls.Add(this.ApplicationlblDeviceOS);
@@ -299,6 +321,8 @@
         private System.Windows.Forms.GroupBox ApplicationgrpBoxRBAUpdateVersion;
         private System.Windows.Forms.RadioButton ApplicationrBtnVITAL;
         private System.Windows.Forms.RadioButton ApplicationrBtnFDRC;
+        private System.Windows.Forms.Label ApplicationlblHardwareVersion;
+        private System.Windows.Forms.Label label7;
     }
 }
 

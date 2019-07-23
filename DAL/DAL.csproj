@@ -34,6 +34,9 @@
     <Reference Include="HidLibrary, Version=3.2.46.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\hidlibrary.3.2.46.0\lib\HidLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="LoggerManager">
+      <HintPath>..\LoggerManager\bin\Debug\LoggerManager.dll</HintPath>
+    </Reference>
     <Reference Include="RBA_SDK_CS">
       <HintPath>..\sdk\RBA_SDK_CS.dll</HintPath>
     </Reference>

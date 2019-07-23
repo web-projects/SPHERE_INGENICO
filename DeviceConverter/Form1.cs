@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using static IPA.DAL.RBADAL.Ingenico.Device;
+using IPA.LoggerManager;
 
 namespace IPA.MainApp
 {
@@ -56,6 +57,9 @@ namespace IPA.MainApp
             InitializeComponent();
 
             this.Text = string.Format("UIA to RBA Conversion Utility - Version {0}", Assembly.GetEntryAssembly().GetName().Version);
+
+            string fullName = Assembly.GetEntryAssembly().Location;
+            Logger.info("{0} VERSION {1}.", System.IO.Path.GetFileNameWithoutExtension(fullName).ToUpper(), Assembly.GetEntryAssembly().GetName().Version);
         }
 
         private void OnFormLoad(object sender, EventArgs e)
@@ -444,6 +448,7 @@ namespace IPA.MainApp
                         this.ApplicationgBxUpdate.Visible = true;
                         this.ApplicationlblUpdate.Visible = true;
                         this.ApplicationbtnUpdate.Visible = true;
+                        this.ApplicationbtnUpdate.Enabled = true;
                     }
                 }
             }
@@ -474,6 +479,10 @@ namespace IPA.MainApp
                     catch(Exception ex)
                     {
                         Debug.WriteLine("main: UpdateUIAFirmware() exception={0}", (object)ex.Message);
+                        if(ex.Message.Contains("disconnected"))
+                        {
+                            UnloadDeviceConfigurationDomain(this, null);
+                        }
                     }
 
                 }).Start();
@@ -493,6 +502,17 @@ namespace IPA.MainApp
                 catch(Exception ex)
                 {
                     Debug.WriteLine("main: UpdateRBAFirmware() exception={0}", (object)ex.Message);
+                    if(ex.Message.Contains("disconnected"))
+                    {
+                        UnloadDeviceConfigurationDomain(this, null);
+                    }
+                }
+                finally
+                {
+                    this.Invoke(new MethodInvoker(() =>
+                    {
+                        this.ApplicationgrpBox1.Visible = false;
+                    }));
                 }
 
             }).Start();

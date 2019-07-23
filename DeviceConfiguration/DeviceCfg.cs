@@ -16,6 +16,7 @@ using System.Reflection;
 using System.Threading;
 using static IPA.DAL.RBADAL.Ingenico.Device;
 using IPA.DAL.Helpers;
+using IPA.LoggerManager;
 
 namespace IPA.DAL.RBADAL
 {
@@ -94,10 +95,9 @@ namespace IPA.DAL.RBADAL
 
                 if (FindIngenicoDevice(ref description, ref deviceID))
                 {
-                    Debug.WriteLine("");
-                    Debug.WriteLine("device capabilities ----------------------------------------------------------------");
-                    Debug.WriteLine("DESCRIPTION                      : {0}", (object)description);
-                    Debug.WriteLine("DEVICE ID                        : {0}", (object)deviceID);
+                    Logger.info("device capabilities ----------------------------------------------------------------");
+                    Logger.info("DESCRIPTION                  : {0}", (object)description);
+                    Logger.info("DEVICE ID                    : {0}", (object)deviceID);
 
                     BoolStringDuple output = new BoolStringDuple(true, description.ToLower().Replace("ingenico ", ""));
                     modelFamily = output.Item2;
@@ -121,21 +121,21 @@ namespace IPA.DAL.RBADAL
                         message[message.Length - 1] = " - RBA";
                         NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = message });
 
-                        Debug.WriteLine("device information ----------------------------------------------------------------");
+                        Logger.info("device information ----------------------------------------------------------------");
                         Core.Data.Entity.Device device = Device.DeviceInfo;
 
                         if(device != null)
                         { 
                             deviceInformation.DeviceOS = Enum.GetName(typeof(DeviceOS), DeviceOS.RBA);
-                            Debug.WriteLine("device INFO[OS]              : {0}", (object) deviceInformation.DeviceOS);
+                            Logger.info("device INFO[OS]              : {0}", (object) deviceInformation.DeviceOS);
                             deviceInformation.ModelName = device.ModelName;
-                            Debug.WriteLine("device INFO[Model Name]      : {0}", (object) deviceInformation.ModelName);
+                            Logger.info("device INFO[Model Name]      : {0}", (object) deviceInformation.ModelName);
                             deviceInformation.SerialNumber = device.SerialNumber;
-                            Debug.WriteLine("device INFO[Serial Number]   : {0}", (object) deviceInformation.SerialNumber);
+                            Logger.info("device INFO[Serial Number]   : {0}", (object) deviceInformation.SerialNumber);
                             deviceInformation.FirmwareVersion = device.FirmwareVersion;
-                            Debug.WriteLine("device INFO[Firmware Version]: {0}", (object) deviceInformation.FirmwareVersion);
+                            Logger.info("device INFO[Firmware Version]: {0}", (object) deviceInformation.FirmwareVersion);
                             deviceInformation.Port = device.AttachedPort;
-                            Debug.WriteLine("device INFO[Port]            : {0}", (object) deviceInformation.Port);
+                            Logger.info("device INFO[Port]            : {0}", (object) deviceInformation.Port);
                         }
 
                         NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_DEVICE_UPDATE_CONFIG });
@@ -533,7 +533,6 @@ namespace IPA.DAL.RBADAL
                 new Thread(() =>
                 {
                     Thread.CurrentThread.IsBackground = true;
-                    Thread.Sleep(30000);
 
                     // Scan for device on reboot
                     DeviceRemovedHandler();
@@ -544,6 +543,12 @@ namespace IPA.DAL.RBADAL
 
         public void UpdateRBAFirmware(int version)
         {
+            object [] message = new [] { (object)SearchStatus.StatusIndex.RBA_INGENICO_FIRMWARE_UPDATE, $"  {deviceInformation.ModelName.Trim()}  on {deviceInformation.Port.Trim()}" };
+            NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = message });
+
+            // disconnect regardless of connection state (to remove notifications)
+            Device.Disconnect();
+
             string response = utility.UpdateRBAFirmware(deviceInformation, version);
             if(!string.IsNullOrEmpty(response))
             {
@@ -551,9 +556,23 @@ namespace IPA.DAL.RBADAL
                 if(index != -1)
                 {
                     string error = response.Substring(index).Split(new string[] {"\n", "\r\n"}, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
-                    object [] message = new [] { (object)SearchStatus.StatusIndex.RBA_INGENICO_FIRMWARE_FAILED, $" {error}" };
+                    message = new [] { (object)SearchStatus.StatusIndex.RBA_INGENICO_FIRMWARE_FAILED, $" {error}" };
                     NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_FINAL, Message = message });
                 }
+            }
+            else
+            {
+                message = new [] { (object)SearchStatus.StatusIndex.INGENICO_DEVICE_REBOOTING };
+                NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_FINAL, Message = message });
+
+                new Thread(() =>
+                {
+                    Thread.CurrentThread.IsBackground = true;
+
+                    // Scan for device on reboot
+                    DeviceRemovedHandler();
+
+                }).Start();
             }
         }
 

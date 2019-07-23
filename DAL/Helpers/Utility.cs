@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IPA.LoggerManager;
 
 namespace IPA.DAL.Helpers
 {
@@ -517,7 +518,7 @@ namespace IPA.DAL.Helpers
                     if (portExpected <= 0)
                     {
                         //Impossible to connect to negative or 0 port, so break and move forward.
-                       Debug.WriteLine($"Not waiting for COM0.");
+                        Debug.WriteLine($"Not waiting for COM0.");
                         break;
                     }                    
                    Debug.WriteLine($"Confirming setup successful for COM{portExpected}.");
@@ -580,21 +581,25 @@ namespace IPA.DAL.Helpers
             string path = System.IO.Directory.GetCurrentDirectory();
             //arguments: true displays the java window, NULL says don't specify a file, take the default
             string arguments = $"-jar \"{path}\\UIAUtilities\\fileUploader.jar\" 7 true NULL {deviceInformation.ModelName.Trim()}";
-            Debug.WriteLine($"device: UIA update args={arguments}");
-            string response = RunExternalExe($"{path}\\UIAUtilities", javaCmd, false, arguments);
+            Logger.debug($"device: UIA update args={arguments}");
+            string result = RunExternalExe($"{path}\\UIAUtilities", javaCmd, false, arguments);
 
-            if(!string.IsNullOrWhiteSpace(response))
+            if(!string.IsNullOrWhiteSpace(result))
             {
                 int index = 0;
-                Debug.WriteLine($"device::UpdateUIAFirmware(): result={response}");
+                Debug.WriteLine($"device::UpdateUIAFirmware(): result={result}");
                 string failure = IPA.DAL.Helpers.StatusCode.GetDisplayMessage(SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_FAILED);
-                if((index = response.IndexOf("File Upload failed.")) >= 0)
+                if((index = result.IndexOf("File Upload failed.")) >= 0)
                 {
-                    response = response.Substring(failure.Length + index).Trim();
+                    result = result.Substring(failure.Length + index).Trim();
+                }
+                else
+                {
+                    result = string.Empty;
                 }
             }
 
-            return response;
+            return result;
         }
 
         public string UpdateRBAFirmware(DeviceInformation deviceInformation, int version)
@@ -625,6 +630,7 @@ namespace IPA.DAL.Helpers
                         if(result.ToString().IndexOf("ERROR") == -1)
                         {
                             WaitForIngenicoDevice(curProcesses, TCFinalPort, string.Empty);
+                            result = string.Empty;
                         }
                     }
                 }

@@ -42,16 +42,16 @@
             this.ApplicationlblDeviceOS = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.ApplicationlblStatus = new System.Windows.Forms.Label();
-            this.ApplicationgBxUpdate = new System.Windows.Forms.GroupBox();
-            this.ApplicationgrpBox1 = new System.Windows.Forms.GroupBox();
-            this.ApplicationrBtn526 = new System.Windows.Forms.RadioButton();
-            this.ApplicationrBtn467 = new System.Windows.Forms.RadioButton();
+            this.ApplicationgroupBoxFirmwareUpdate = new System.Windows.Forms.GroupBox();
+            this.ApplicationgrpBoxRBAUpdateVersion = new System.Windows.Forms.GroupBox();
+            this.ApplicationrBtnVITAL = new System.Windows.Forms.RadioButton();
+            this.ApplicationrBtnFDRC = new System.Windows.Forms.RadioButton();
             this.ApplicationbtnUpdate = new System.Windows.Forms.Button();
             this.ApplicationlblUpdate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ApplicationPicBoxWait)).BeginInit();
-            this.ApplicationgBxUpdate.SuspendLayout();
-            this.ApplicationgrpBox1.SuspendLayout();
+            this.ApplicationgroupBoxFirmwareUpdate.SuspendLayout();
+            this.ApplicationgrpBoxRBAUpdateVersion.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -176,52 +176,52 @@
             this.ApplicationlblStatus.Text = "STATUS:";
             this.ApplicationlblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // ApplicationgBxUpdate
+            // ApplicationgroupBoxFirmwareUpdate
             // 
-            this.ApplicationgBxUpdate.Controls.Add(this.ApplicationgrpBox1);
-            this.ApplicationgBxUpdate.Controls.Add(this.ApplicationbtnUpdate);
-            this.ApplicationgBxUpdate.Controls.Add(this.ApplicationlblUpdate);
-            this.ApplicationgBxUpdate.Location = new System.Drawing.Point(26, 373);
-            this.ApplicationgBxUpdate.Name = "ApplicationgBxUpdate";
-            this.ApplicationgBxUpdate.Size = new System.Drawing.Size(735, 98);
-            this.ApplicationgBxUpdate.TabIndex = 13;
-            this.ApplicationgBxUpdate.TabStop = false;
-            this.ApplicationgBxUpdate.Text = "Firmware Update";
-            this.ApplicationgBxUpdate.Visible = false;
+            this.ApplicationgroupBoxFirmwareUpdate.Controls.Add(this.ApplicationgrpBoxRBAUpdateVersion);
+            this.ApplicationgroupBoxFirmwareUpdate.Controls.Add(this.ApplicationbtnUpdate);
+            this.ApplicationgroupBoxFirmwareUpdate.Controls.Add(this.ApplicationlblUpdate);
+            this.ApplicationgroupBoxFirmwareUpdate.Location = new System.Drawing.Point(26, 373);
+            this.ApplicationgroupBoxFirmwareUpdate.Name = "ApplicationgroupBoxFirmwareUpdate";
+            this.ApplicationgroupBoxFirmwareUpdate.Size = new System.Drawing.Size(735, 98);
+            this.ApplicationgroupBoxFirmwareUpdate.TabIndex = 13;
+            this.ApplicationgroupBoxFirmwareUpdate.TabStop = false;
+            this.ApplicationgroupBoxFirmwareUpdate.Text = "Firmware Update";
+            this.ApplicationgroupBoxFirmwareUpdate.Visible = false;
             // 
-            // ApplicationgrpBox1
+            // ApplicationgrpBoxRBAUpdateVersion
             // 
-            this.ApplicationgrpBox1.Controls.Add(this.ApplicationrBtn526);
-            this.ApplicationgrpBox1.Controls.Add(this.ApplicationrBtn467);
-            this.ApplicationgrpBox1.Location = new System.Drawing.Point(466, 28);
-            this.ApplicationgrpBox1.Name = "ApplicationgrpBox1";
-            this.ApplicationgrpBox1.Size = new System.Drawing.Size(216, 47);
-            this.ApplicationgrpBox1.TabIndex = 2;
-            this.ApplicationgrpBox1.TabStop = false;
-            this.ApplicationgrpBox1.Text = "RBA Firmware Version";
-            this.ApplicationgrpBox1.Visible = false;
+            this.ApplicationgrpBoxRBAUpdateVersion.Controls.Add(this.ApplicationrBtnVITAL);
+            this.ApplicationgrpBoxRBAUpdateVersion.Controls.Add(this.ApplicationrBtnFDRC);
+            this.ApplicationgrpBoxRBAUpdateVersion.Location = new System.Drawing.Point(466, 28);
+            this.ApplicationgrpBoxRBAUpdateVersion.Name = "ApplicationgrpBoxRBAUpdateVersion";
+            this.ApplicationgrpBoxRBAUpdateVersion.Size = new System.Drawing.Size(216, 47);
+            this.ApplicationgrpBoxRBAUpdateVersion.TabIndex = 2;
+            this.ApplicationgrpBoxRBAUpdateVersion.TabStop = false;
+            this.ApplicationgrpBoxRBAUpdateVersion.Text = "RBA Firmware Version";
+            this.ApplicationgrpBoxRBAUpdateVersion.Visible = false;
             // 
-            // ApplicationrBtn526
+            // ApplicationrBtnVITAL
             // 
-            this.ApplicationrBtn526.AutoSize = true;
-            this.ApplicationrBtn526.Location = new System.Drawing.Point(132, 16);
-            this.ApplicationrBtn526.Name = "ApplicationrBtn526";
-            this.ApplicationrBtn526.Size = new System.Drawing.Size(43, 17);
-            this.ApplicationrBtn526.TabIndex = 1;
-            this.ApplicationrBtn526.TabStop = true;
-            this.ApplicationrBtn526.Text = "526";
-            this.ApplicationrBtn526.UseVisualStyleBackColor = true;
+            this.ApplicationrBtnVITAL.AutoSize = true;
+            this.ApplicationrBtnVITAL.Location = new System.Drawing.Point(132, 16);
+            this.ApplicationrBtnVITAL.Name = "ApplicationrBtnVITAL";
+            this.ApplicationrBtnVITAL.Size = new System.Drawing.Size(55, 17);
+            this.ApplicationrBtnVITAL.TabIndex = 1;
+            this.ApplicationrBtnVITAL.TabStop = true;
+            this.ApplicationrBtnVITAL.Text = "VITAL";
+            this.ApplicationrBtnVITAL.UseVisualStyleBackColor = true;
             // 
-            // ApplicationrBtn467
+            // ApplicationrBtnFDRC
             // 
-            this.ApplicationrBtn467.AutoSize = true;
-            this.ApplicationrBtn467.Location = new System.Drawing.Point(65, 16);
-            this.ApplicationrBtn467.Name = "ApplicationrBtn467";
-            this.ApplicationrBtn467.Size = new System.Drawing.Size(43, 17);
-            this.ApplicationrBtn467.TabIndex = 0;
-            this.ApplicationrBtn467.TabStop = true;
-            this.ApplicationrBtn467.Text = "467";
-            this.ApplicationrBtn467.UseVisualStyleBackColor = true;
+            this.ApplicationrBtnFDRC.AutoSize = true;
+            this.ApplicationrBtnFDRC.Location = new System.Drawing.Point(65, 16);
+            this.ApplicationrBtnFDRC.Name = "ApplicationrBtnFDRC";
+            this.ApplicationrBtnFDRC.Size = new System.Drawing.Size(54, 17);
+            this.ApplicationrBtnFDRC.TabIndex = 0;
+            this.ApplicationrBtnFDRC.TabStop = true;
+            this.ApplicationrBtnFDRC.Text = "FDRC";
+            this.ApplicationrBtnFDRC.UseVisualStyleBackColor = true;
             // 
             // ApplicationbtnUpdate
             // 
@@ -251,7 +251,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(788, 567);
             this.Controls.Add(this.ApplicationPicBoxWait);
-            this.Controls.Add(this.ApplicationgBxUpdate);
+            this.Controls.Add(this.ApplicationgroupBoxFirmwareUpdate);
             this.Controls.Add(this.ApplicationlblStatus);
             this.Controls.Add(this.ApplicationlblDeviceOS);
             this.Controls.Add(this.label6);
@@ -270,9 +270,9 @@
             this.Load += new System.EventHandler(this.OnFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ApplicationPicBoxWait)).EndInit();
-            this.ApplicationgBxUpdate.ResumeLayout(false);
-            this.ApplicationgrpBox1.ResumeLayout(false);
-            this.ApplicationgrpBox1.PerformLayout();
+            this.ApplicationgroupBoxFirmwareUpdate.ResumeLayout(false);
+            this.ApplicationgrpBoxRBAUpdateVersion.ResumeLayout(false);
+            this.ApplicationgrpBoxRBAUpdateVersion.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,12 +293,12 @@
         private System.Windows.Forms.Label ApplicationlblDeviceOS;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label ApplicationlblStatus;
-        private System.Windows.Forms.GroupBox ApplicationgBxUpdate;
+        private System.Windows.Forms.GroupBox ApplicationgroupBoxFirmwareUpdate;
         private System.Windows.Forms.Button ApplicationbtnUpdate;
         private System.Windows.Forms.Label ApplicationlblUpdate;
-        private System.Windows.Forms.GroupBox ApplicationgrpBox1;
-        private System.Windows.Forms.RadioButton ApplicationrBtn526;
-        private System.Windows.Forms.RadioButton ApplicationrBtn467;
+        private System.Windows.Forms.GroupBox ApplicationgrpBoxRBAUpdateVersion;
+        private System.Windows.Forms.RadioButton ApplicationrBtnVITAL;
+        private System.Windows.Forms.RadioButton ApplicationrBtnFDRC;
     }
 }
 

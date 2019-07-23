@@ -602,7 +602,7 @@ namespace IPA.DAL.Helpers
             return result;
         }
 
-        public string UpdateRBAFirmware(DeviceInformation deviceInformation, int version)
+        public string UpdateRBAFirmware(DeviceInformation deviceInformation, string version)
         {
             string result = string.Empty;
             try

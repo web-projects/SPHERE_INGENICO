@@ -2,6 +2,7 @@
 using IPA.DAL.RBADAL;
 using IPA.DAL.RBADAL.Helpers;
 using IPA.DAL.RBADAL.Services;
+using IPA.DeviceConfiguration.Helpers;
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -12,6 +13,7 @@ using System.Threading;
 using System.Windows.Forms;
 using static IPA.DAL.RBADAL.Ingenico.Device;
 using IPA.LoggerManager;
+using static IPA.DeviceConfiguration.Helpers.RBAFirmware;
 
 namespace IPA.MainApp
 {
@@ -436,20 +438,31 @@ namespace IPA.MainApp
                     {
                         if(config[2].StartsWith("13.", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            this.ApplicationlblUpdate.Text = "UPDATE TO RBA v21.0.18";
-                            this.ApplicationrBtn467.Checked = true;
-                            this.ApplicationgrpBox1.Visible = true;
+                            this.ApplicationlblUpdate.Text = $"UPDATE TO RBA {Enum.GetName(typeof(IngenicoRBA), IngenicoRBA.FDRC)}/{Enum.GetName(typeof(IngenicoRBA), IngenicoRBA.VITAL)}";
+                            this.ApplicationrBtnFDRC.Checked = true;
+                            this.ApplicationgrpBoxRBAUpdateVersion.Visible = true;
                         }
                         else
                         { 
                             this.ApplicationlblUpdate.Text = "UPDATE TO UIA v13.1.12";
-                            this.ApplicationgrpBox1.Visible = false;
+                            this.ApplicationgrpBoxRBAUpdateVersion.Visible = false;
                         }
-                        this.ApplicationgBxUpdate.Visible = true;
+                        this.ApplicationgroupBoxFirmwareUpdate.Visible = true;
                         this.ApplicationlblUpdate.Visible = true;
                         this.ApplicationbtnUpdate.Visible = true;
                         this.ApplicationbtnUpdate.Enabled = true;
                     }
+                    //20190723: to allow RBA FDRC -> VITAL (and viceversa), one of the EFT loads needs to be other than 007
+                    //else
+                    //{
+                    //    this.ApplicationgrpBoxRBAUpdateVersion.Visible = true;
+                    //    this.ApplicationgroupBoxFirmwareUpdate.Visible = true;
+                    //    this.ApplicationlblUpdate.Text = $"UPDATE RBA ({Enum.GetName(typeof(IngenicoRBA), IngenicoRBA.FDRC)} / {Enum.GetName(typeof(IngenicoRBA), IngenicoRBA.VITAL)})";
+                    //    this.ApplicationlblUpdate.Visible = true;
+                    //    this.ApplicationrBtnFDRC.Checked = true;
+                    //    this.ApplicationbtnUpdate.Visible = true;
+                    //    this.ApplicationbtnUpdate.Enabled = true;
+                    //}
                 }
             }
             catch(Exception ex)
@@ -497,7 +510,8 @@ namespace IPA.MainApp
                 try 
                 { 
                     // RBA firmware update
-                    devicePlugin.UpdateRBAFirmware(ApplicationrBtn467.Checked ? 467 : 526);
+                    devicePlugin.UpdateRBAFirmware(ApplicationrBtnFDRC.Checked ? Enum.GetName(typeof(IngenicoRBA), IngenicoRBA.FDRC)
+                                                                               : Enum.GetName(typeof(IngenicoRBA), IngenicoRBA.VITAL));
                 }
                 catch(Exception ex)
                 {
@@ -507,11 +521,13 @@ namespace IPA.MainApp
                         UnloadDeviceConfigurationDomain(this, null);
                     }
                 }
+                //20190723: to allow RBA FDRC -> VITAL (and viceversa), one of the EFT loads needs to be other than 007
                 finally
                 {
                     this.Invoke(new MethodInvoker(() =>
                     {
-                        this.ApplicationgrpBox1.Visible = false;
+                        this.ApplicationgrpBoxRBAUpdateVersion.Visible = false;
+                        this.ApplicationgroupBoxFirmwareUpdate.Visible = false;
                     }));
                 }
 

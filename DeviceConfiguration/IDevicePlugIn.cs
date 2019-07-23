@@ -20,6 +20,6 @@ namespace IPA.DAL.RBADAL
     void SetFormClosing(bool state);
     // Firmare update
     void UpdateUIAFirmware();
-    void UpdateRBAFirmware(int version);
+    void UpdateRBAFirmware(string version);
   }
 }

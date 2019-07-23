@@ -324,6 +324,7 @@ namespace IPA.DAL.RBADAL.Services
             SerialNumber = _deviceHealth.SERIAL_NUMBER,
             FirmwareVersion = _deviceHealth.APP_VERSION,
             ModelName = _deviceHealth.DEVICE_NAME,
+            ModelVersion = _deviceInfo.DEVICE,
             OSVersion = _deviceHealth.OS_VERSION,
             AssetNumber = _deviceInfo.MANUFACTURING_SERIAL_NUMBER,
             AttachedPort = _attachedPort

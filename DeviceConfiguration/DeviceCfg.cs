@@ -121,7 +121,7 @@ namespace IPA.DAL.RBADAL
                         message[message.Length - 1] = " - RBA";
                         NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = message });
 
-                        Logger.info("device information ----------------------------------------------------------------");
+                        Logger.info("RBA device information ----------------------------------------------------------------");
                         Core.Data.Entity.Device device = Device.DeviceInfo;
 
                         if(device != null)
@@ -130,6 +130,9 @@ namespace IPA.DAL.RBADAL
                             Logger.info("device INFO[OS]              : {0}", (object) deviceInformation.DeviceOS);
                             deviceInformation.ModelName = device.ModelName;
                             Logger.info("device INFO[Model Name]      : {0}", (object) deviceInformation.ModelName);
+                            string [] modelVersion = device.ModelVersion.Split('-');
+                            deviceInformation.ModelVersion = (modelVersion.Length == 1 || !modelVersion[1].StartsWith("03")) ? "v3" : "v4";
+                            Logger.info("device INFO[Model Version]   : {0}", (object) deviceInformation.ModelVersion);
                             deviceInformation.SerialNumber = device.SerialNumber;
                             Logger.info("device INFO[Serial Number]   : {0}", (object) deviceInformation.SerialNumber);
                             deviceInformation.FirmwareVersion = device.FirmwareVersion;
@@ -214,19 +217,19 @@ namespace IPA.DAL.RBADAL
                 if (expectedResponses)
                 { 
                     attached = true;
-                    Debug.WriteLine("device information ----------------------------------------------------------------");
+                    Logger.info("UIA device information ----------------------------------------------------------------");
                     deviceInformation.DeviceOS = Enum.GetName(typeof(DeviceOS), DeviceOS.UIA);
-                    Debug.WriteLine("device INFO[OS]              : {0}", (object) deviceInformation.DeviceOS);
+                    Logger.info("device INFO[OS]              : {0}", (object) deviceInformation.DeviceOS);
                     deviceInformation.ModelName = model;
-                    Debug.WriteLine("device INFO[Model Name]      : {0}", (object) deviceInformation.ModelName);
+                    Logger.info("device INFO[Model Name]      : {0}", (object) deviceInformation.ModelName);
                     deviceInformation.ModelVersion = modelVer;
-                    Debug.WriteLine("device INFO[Model Version]   : {0}", (object) deviceInformation.ModelVersion);
+                    Logger.info("device INFO[Model Version]   : {0}", (object) deviceInformation.ModelVersion);
                     deviceInformation.SerialNumber = serialNumber;
-                    Debug.WriteLine("device INFO[Serial Number]   : {0}", (object) deviceInformation.SerialNumber);
+                    Logger.info("device INFO[Serial Number]   : {0}", (object) deviceInformation.SerialNumber);
                     deviceInformation.FirmwareVersion = uiaVersion;
-                    Debug.WriteLine("device INFO[Firmware Version]: {0}", (object) deviceInformation.FirmwareVersion);
+                    Logger.info("device INFO[Firmware Version]: {0}", (object) deviceInformation.FirmwareVersion);
                     deviceInformation.Port = $"COM{portFound}";
-                    Debug.WriteLine("device INFO[Port]            : {0}", (object) deviceInformation.Port);
+                    Logger.info("device INFO[Port]            : {0}", (object) deviceInformation.Port);
 
                     NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_DEVICE_UPDATE_CONFIG });
 
@@ -520,6 +523,7 @@ namespace IPA.DAL.RBADAL
             Device.Disconnect();
 
             string response = utility.UpdateUIAFirmware(deviceInformation);
+
             if(!string.IsNullOrEmpty(response))
             {
                 message = new [] { (object)SearchStatus.StatusIndex.UIA_INGENICO_FIRMWARE_FAILED, $" {response}" };
@@ -541,7 +545,7 @@ namespace IPA.DAL.RBADAL
             }
         }
 
-        public void UpdateRBAFirmware(int version)
+        public void UpdateRBAFirmware(string version)
         {
             object [] message = new [] { (object)SearchStatus.StatusIndex.RBA_INGENICO_FIRMWARE_UPDATE, $"  {deviceInformation.ModelName.Trim()}  on {deviceInformation.Port.Trim()}" };
             NotificationRaise(new DeviceNotificationEventArgs { NotificationType = NOTIFICATION_TYPE.NT_STATUS_MESSAGE_UPDATE, Message = message });
@@ -550,6 +554,7 @@ namespace IPA.DAL.RBADAL
             Device.Disconnect();
 
             string response = utility.UpdateRBAFirmware(deviceInformation, version);
+
             if(!string.IsNullOrEmpty(response))
             {
                 int index = response.ToString().IndexOf("ERROR");

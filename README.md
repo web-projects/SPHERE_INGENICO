@@ -30,3 +30,4 @@ This an application to Configure Ingenico Devices.
 * 20190722 - Added RBA firmware updater.
            - Fixes to UIA firmware updater.
 * 20190723 - Added LoggerManager.
+           - Fixes to RBA firmware updater.

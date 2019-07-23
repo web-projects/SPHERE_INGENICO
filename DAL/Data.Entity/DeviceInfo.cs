@@ -50,6 +50,7 @@ namespace IPA.Core.Data.Entity
         [Required(ErrorMessage = "ModelID is Required.")]
         public int ModelID { get; set; }
         public string ModelName { get; set; }
+        public string ModelVersion { get; set; }
         public Nullable<int> AppID { get; set; }
         [Required(ErrorMessage = "SerialNumber is Required.")]
         [MaxLength(30)]

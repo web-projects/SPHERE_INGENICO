@@ -95,100 +95,100 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="RBAUtilities\firmware\467\iPP320\v3\EFTL0007">
+    <None Include="RBAUtilities\firmware\FDRC\iPP320\v3\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iPP320\v3\EFTP0007">
+    <None Include="RBAUtilities\firmware\FDRC\iPP320\v3\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iPP320\v4\EFTL0007">
+    <None Include="RBAUtilities\firmware\FDRC\iPP320\v4\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iPP320\v4\EFTP0007">
+    <None Include="RBAUtilities\firmware\FDRC\iPP320\v4\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iPP350\v3\EFTL0007">
+    <None Include="RBAUtilities\firmware\FDRC\iPP350\v3\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iPP350\v3\EFTP0007">
+    <None Include="RBAUtilities\firmware\FDRC\iPP350\v3\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iPP350\v4\EFTL0007">
+    <None Include="RBAUtilities\firmware\FDRC\iPP350\v4\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iPP350\v4\EFTP0007">
+    <None Include="RBAUtilities\firmware\FDRC\iPP350\v4\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iSC250\v3\EFTL0007">
+    <None Include="RBAUtilities\firmware\FDRC\iSC250\v3\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iSC250\v3\EFTP0007">
+    <None Include="RBAUtilities\firmware\FDRC\iSC250\v3\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iSC250\v4\EFTL0007">
+    <None Include="RBAUtilities\firmware\FDRC\iSC250\v4\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iSC250\v4\EFTP0007">
+    <None Include="RBAUtilities\firmware\FDRC\iSC250\v4\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iSC480\v3\EFTL0007">
+    <None Include="RBAUtilities\firmware\FDRC\iSC480\v3\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iSC480\v3\EFTP0007">
+    <None Include="RBAUtilities\firmware\FDRC\iSC480\v3\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iSC480\v4\EFTL0007">
+    <None Include="RBAUtilities\firmware\FDRC\iSC480\v4\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\467\iSC480\v4\EFTP0007">
+    <None Include="RBAUtilities\firmware\FDRC\iSC480\v4\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iPP320\v3\EFTL0007">
+    <None Include="RBAUtilities\firmware\VITAL\iPP320\v3\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iPP320\v3\EFTP0007">
+    <None Include="RBAUtilities\firmware\VITAL\iPP320\v3\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iPP320\v4\EFTL0007">
+    <None Include="RBAUtilities\firmware\VITAL\iPP320\v4\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iPP320\v4\EFTP0007">
+    <None Include="RBAUtilities\firmware\VITAL\iPP320\v4\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iPP350\v3\EFTL0007">
+    <None Include="RBAUtilities\firmware\VITAL\iPP350\v3\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iPP350\v3\EFTP0007">
+    <None Include="RBAUtilities\firmware\VITAL\iPP350\v3\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iPP350\v4\EFTL0007">
+    <None Include="RBAUtilities\firmware\VITAL\iPP350\v4\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iPP350\v4\EFTP0007">
+    <None Include="RBAUtilities\firmware\VITAL\iPP350\v4\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iSC250\v3\EFTL0007">
+    <None Include="RBAUtilities\firmware\VITAL\iSC250\v3\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iSC250\v3\EFTP0007">
+    <None Include="RBAUtilities\firmware\VITAL\iSC250\v3\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iSC250\v4\EFTL0007">
+    <None Include="RBAUtilities\firmware\VITAL\iSC250\v4\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iSC250\v4\EFTP0007">
+    <None Include="RBAUtilities\firmware\VITAL\iSC250\v4\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iSC480\v3\EFTL0007">
+    <None Include="RBAUtilities\firmware\VITAL\iSC480\v3\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iSC480\v3\EFTP0007">
+    <None Include="RBAUtilities\firmware\VITAL\iSC480\v3\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iSC480\v4\EFTL0007">
+    <None Include="RBAUtilities\firmware\VITAL\iSC480\v4\EFTL0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RBAUtilities\firmware\526\iSC480\v4\EFTP0007">
+    <None Include="RBAUtilities\firmware\VITAL\iSC480\v4\EFTP0007">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIAUtilities\jpos\res\jpos.properties">
